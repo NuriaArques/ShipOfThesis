@@ -1,0 +1,64 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow-y: hidden; /* Prevent scrolling */
+  overflow-x: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  /* flex-direction: column;  */
+  /* overflow: auto; Prevent child overflow */
+}
+
+.App {
+  font-family: sans-serif, sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  /* padding: 10px 20px; */
+  background-color: #002b55;
+  width: 100%;
+}
+
+.header-logo img {
+  height: 50px;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 20px;
+  background-color: #f4f4f4;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+/* .left-panel, .center-panel, .right-panel {
+  width: 30%;
+}
+
+.center-panel {
+  text-align: center;
+}
+
+.right-panel {
+  padding-left: 20px;
+} */
+
+.pdf-report a {
+  display: block;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #002b55;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+}
