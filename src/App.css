@@ -3,13 +3,13 @@ body, html {
   padding: 0;
   overflow-y: hidden; /* Prevent scrolling */
   overflow-x: hidden;
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: auto;
 }
 
 #root {
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: auto;
   display: flex;
   /* flex-direction: column;  */
   /* overflow: auto; Prevent child overflow */
@@ -17,6 +17,10 @@ body, html {
 
 .App {
   font-family: sans-serif, sans-serif;
+  background-color: #f4f4f4;
+  width: 100%;
+  height: auto;
+  /* display: flex; */
 }
 
 .header {
@@ -31,32 +35,39 @@ body, html {
   height: 50px;
 }
 
+.sidebar-toggle-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 10px;
+  position: relative;
+}
+
+.content.shifted {
+  margin-left: 170px; /* Shift content to the right */
+  padding-left: 50px;
+  margin-top: 80px;
+}
+
 .content {
   display: flex;
   justify-content: space-between;
-  padding: 20px 20px;
-  background-color: #f4f4f4;
+  align-items: center;
+  /* width: fit-content; */
+  /* height: fit-content; */
+  margin: 50px 50px 50px 50px;
+  padding: 5px 5px 5px 5px;
+  /* background-color: red; */
   overflow: hidden;
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: auto;
 }
-
-/* .left-panel, .center-panel, .right-panel {
-  width: 30%;
-}
-
-.center-panel {
-  text-align: center;
-}
-
-.right-panel {
-  padding-left: 20px;
-} */
 
 .pdf-report a {
   display: block;
-  margin-top: 10px;
-  padding: 10px;
+  padding: 5px;
   background-color: #002b55;
   color: white;
   text-align: center;

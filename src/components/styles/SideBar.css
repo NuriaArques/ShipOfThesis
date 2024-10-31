@@ -1,0 +1,63 @@
+.sidebar {
+    width: 200px;
+    height: 100vh;
+    background-color: #002b55;
+    color: white;
+    /* padding: 10px; */
+    position: fixed;
+    top: 0;
+    left: -350px;
+    transition: left 0.3s ease; /* Slide animation */
+    z-index: 10; /* On top of other content */
+    font: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar.open {
+    left: 0; /* Slide into view */
+}
+
+.sidebar .close-btn {
+    background: transparent;
+    color: white;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    align-self: flex-end;
+    margin: 10px 10px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 10px;
+    margin-top: 150px;
+    /* text-align: center; */
+}
+
+.sidebar ul li {
+    margin: 10px 0;
+    /* cursor: pointer; */
+}
+
+.sidebar ul li a {
+    color: white; /* Link color */
+    text-decoration: none; /* Remove underline */
+    font-size: 18px;
+    padding: 10px 20px;
+    display: block; /* Makes the entire area clickable */
+    border-radius: 8px;
+}
+
+.sidebar ul li a:hover {
+    color: #ddd;
+    background-color: #033e79;
+}
+
+.sidebar ul li a.active-link {
+    /* color: #947830; Gold color for highlighting */
+    color: white;
+    background-color: #466ab0;
+    font-weight: bold;
+}

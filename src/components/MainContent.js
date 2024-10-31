@@ -1,6 +1,5 @@
 import React from 'react';
-import BoatModelViewer from './BoatModelViewer';
-import './MainContent.css';
+import './styles/MainContent.css';
 
 function MainContent() {
 
@@ -24,7 +23,7 @@ function MainContent() {
             
                     {/* Boat Characteristics (Right Side) */}
                     <div className="boat-characteristics">
-                        <h2>Grand Sturdy 30.0 AC</h2>
+                        <h1>Grand Sturdy 30.0 AC</h1>
                         <p>
                             9.70 x 3.35 x 1.00 m<br /> 
                             4 (+2) beds<br /> 
@@ -58,11 +57,11 @@ function MainContent() {
                 <div className="pdf-report-buttons">
                 {/* Button to download the PDF */}
                     <a href={report} download title="Download Report">
-                        <span style={{ cursor: 'pointer', marginRight: '10px' }}>📥</span> {/* Download symbol */}
+                        <span style={{ cursor: 'pointer', marginRight: '10px' }}>⤓</span> {/* Download symbol */}
                     </a>
                     {/* Button to open the PDF in a new tab */}
                     <a href={report} target="_blank" rel="noopener noreferrer" title="Open Report">
-                        <span style={{ cursor: 'pointer' }}>🔍</span> {/* Open symbol */}
+                        <span style={{ cursor: 'pointer' }}>⤢</span> {/* Open symbol */}
                     </a>
                 </div>
             </div>

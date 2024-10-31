@@ -1,0 +1,15 @@
+.yacht-series {
+    text-align: left;
+    font-size: large;
+    padding: 10px;
+    height: fill;
+    width: fill;
+    align-items: center;
+}
+
+.yacht-cards-container {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    /* flex-wrap: wrap; */
+}

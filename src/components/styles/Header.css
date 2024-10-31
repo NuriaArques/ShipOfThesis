@@ -9,7 +9,8 @@
     padding: 5px 20px;                 /* Padding around the header */
     position: relative;
     z-index: 1;
-    width: fit-content;
+    width: auto;
+    margin: 0px 15px 0px 0px;
 }
 
 /* Styles for each logo container */
