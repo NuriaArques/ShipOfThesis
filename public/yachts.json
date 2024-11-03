@@ -1,0 +1,76 @@
+[
+    {
+        "id": "grand-sturdy",
+        "name": "Linssen Grand Sturdy series",
+        "image": "/img/linssen-grand-sturdy.webp",
+        "dimensions": "9-14 m / 30'- 45' ft",
+        "models": [
+            {
+                "id": "grand-sturdy-30-ac",
+                "name": "Grand Sturdy 30.0 AC",
+                "image": "/img/GS30AC_12-2024.jpg",
+                "dimensions": "9.70 x 3.35 x 1.00 m",
+                "beds": "4 (+2) beds",
+                "releaseDate": "December 2024",
+                "report": "/reports/Report_GS30AC_12-2024.pdf"
+            },
+            {
+                "id": "grand-sturdy-30-sedan",
+                "name": "Grand Sturdy 30.0 Sedan",
+                "image": "/img/GS30S_12-2024.jpg",
+                "dimensions": "9.70 x 3.35 x 1.00 m",
+                "beds": "4 (+2) beds",
+                "releaseDate": "December 2024",
+                "report": "/reports/Report_G30S_12-2024.pdf"
+            },
+            {
+                "id": "grand-sturdy-35-ac",
+                "name": "Grand Sturdy 35.0 AC",
+                "image": "/img/linssen-grand-sturdy.webp", 
+                "dimensions": "10.70 x 3.4 x 1.00 m",
+                "beds": "4 (+2) beds",
+                "releaseDate": "November 2024",
+                "report": "/reports/Report_GS35AC_11-2024.pdf"
+            },
+            {
+                "id": "grand-sturdy-35-sedan",
+                "name": "Grand Sturdy 35.0 Sedan",
+                "image": "/img/GS35S_10-2024.jpg",
+                "dimensions": "10.70 x 3.4 x 1.00 m",
+                "beds": "2 (+2) beds",
+                "releaseDate": "October 2024",
+                "report": "/reports/Report_GS35S_10-2024.pdf"
+            },
+            {
+                "id": "grand-sturdy-35-ac-bis",
+                "name": "Grand Sturdy 35.0 AC",
+                "image": "/img/linssen-grand-sturdy.webp", 
+                "dimensions": "10.70 x 3.4 x 1.00 m",
+                "beds": "4 (+2) beds",
+                "releaseDate": "November 2024",
+                "report": "/reports/Report_GS35AC_11-2024.pdf"
+            }
+        ]
+    },
+    {
+        "id": "sl",
+        "name": "Linssen SL <br />series",
+        "image": "/img/linssen-sl.webp",
+        "dimensions": "9-14 m / 30'- 45' ft",
+        "models": []
+    },
+    {
+        "id": "variotop",
+        "name": "Linssen Variotop series",
+        "image": "/img/linssen-variotop.webp",
+        "dimensions": "14-16.5 m / 45'- 55' ft",
+        "models": []
+    },
+    {
+        "id": "variodeck",
+        "name": "Linssen Variodeck series",
+        "image": "/img/linssen-variodeck.webp",
+        "dimensions": "15.50 m / 50' ft",
+        "models": []
+    }
+]

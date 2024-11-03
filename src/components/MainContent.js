@@ -1,13 +1,81 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import './styles/MainContent.css';
+
+
+function Chat() {
+    const [messages, setMessages] = useState([]);
+    const [input, setInput] = useState("");
+
+    const location = useLocation();
+    const model  = location.state?.yacht.name;
+
+    useEffect(() => {
+        const introMessage = [
+            "Welcome! How can I assist you today?",
+            `You can ask me any question regarding the quality control and cleaning process of ${model}.`
+        ];
+        setMessages([{ type: "bot", text: introMessage }]);
+    }, [model]);
+
+    const handleSend = () => {
+        if (input.trim() !== "") {
+            // User question
+            setMessages([...messages, { type: "user", text: input }]);
+            
+            // CONSTANT RESPONSE!!!!!
+            const response = "This is a fixed response.";
+            setMessages(prevMessages => [...prevMessages, { type: "bot", text: response }]);
+
+            setInput("");
+        }
+    };
+
+    // Trigger send on Enter key
+    const handleKeyDown = (event) => {
+        if (event.key === "Enter") {
+            handleSend();
+        }
+    };
+
+    return (
+        <div className="chat-container">
+            <div className="chat-messages">
+                {messages.map((msg, index) => (
+                    <div key={index} className={`chat-message ${msg.type}`}>
+                        {Array.isArray(msg.text)
+                            ? msg.text.map((line, idx) => (
+                                <div key={idx}>{line}<br /></div>
+                              ))
+                            : msg.text
+                        }
+                    </div>
+                ))}
+            </div>
+            <div className="chat-input">
+                <input 
+                    type="text" 
+                    value={input} 
+                    onChange={(e) => setInput(e.target.value)} 
+                    onKeyDown={handleKeyDown}
+                    placeholder="Type your question here..." 
+                />
+                <button onClick={handleSend}>➤</button>
+            </div>
+        </div>
+    );
+}
 
 function MainContent() {
 
-    const report = "/reports/Report_GS30AC_12-2024.pdf"
+    const location = useLocation();
+    const ymodel  = location.state?.yacht;
+
+    const report = ymodel?.report
     // Function to extract the report name from the URL
     const getReportName = (url) => {
         const lastSlashIndex = url.lastIndexOf('/');
-        return url.substring(lastSlashIndex + 1); // Extract the name between last "/" and ".pdf"
+        return url.substring(lastSlashIndex + 1);
     };
     
     return (
@@ -23,17 +91,16 @@ function MainContent() {
             
                     {/* Boat Characteristics (Right Side) */}
                     <div className="boat-characteristics">
-                        <h1>Grand Sturdy 30.0 AC</h1>
-                        <p>
-                            9.70 x 3.35 x 1.00 m<br /> 
-                            4 (+2) beds<br /> 
-                            December 2024
-                        </p>
+                        <h1 style={{fontFamily: "Segoe UI"}}>{ymodel.name}</h1>
+                        
+                        <p>{ymodel.dimensions}</p>
+                        <p>{ymodel.beds}</p>
+                        <p>{ymodel.releaseDate}</p>
                     </div>
                 
                     {/* Boat Image (Left Side) */}
                     <div className="boat-image">
-                        <img src='/img/GrandSturdy.png' alt="Grand Sturdy Boat" />
+                        <img src={ymodel.image} alt='yacht image' />
                     </div>
 
                 </div>
@@ -41,10 +108,6 @@ function MainContent() {
 
                 {/* 3D Viewer Section (Below Info and Image) */}
                 <div className="three-d-visualization">
-                    {/* Placeholder for 3D viewer component */}
-                    {/* Uncomment the line below to include actual 3D viewer component */}
-                    {/* <BoatModelViewer /> */}
-                    
                     <img src='/img/3Dexample.jpg' alt="3D structure" />
 
                 </div>
@@ -52,33 +115,29 @@ function MainContent() {
 
             {/* Report Download Section */}
             <div className="pdf-report">
-            <div className="pdf-report-header">
-                <span>{getReportName(report)}</span>
-                <div className="pdf-report-buttons">
-                {/* Button to download the PDF */}
-                    <a href={report} download title="Download Report">
-                        <span style={{ cursor: 'pointer', marginRight: '10px' }}>⤓</span> {/* Download symbol */}
-                    </a>
-                    {/* Button to open the PDF in a new tab */}
-                    <a href={report} target="_blank" rel="noopener noreferrer" title="Open Report">
-                        <span style={{ cursor: 'pointer' }}>⤢</span> {/* Open symbol */}
-                    </a>
+                <div className="pdf-report-header">
+                    <span>{getReportName(report)}</span>
+                    <div className="pdf-report-buttons">
+                    {/* Button to download the PDF */}
+                        <a href={report} download title="Download Report">
+                            <span style={{ cursor: 'pointer', marginRight: '10px' }}>⤓</span>
+                        </a>
+                        {/* Button to open the PDF in a new tab */}
+                        <a href={report} target="_blank" rel="noopener noreferrer" title="Open Report">
+                            <span style={{ cursor: 'pointer' }}>⤢</span>
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <iframe
-                src={report}
-                title="Report Preview"
-            />
+                <iframe
+                    src={report}
+                    title="Report Preview"
+                />
             </div>
         </div>
 
-        {/* Right Panel */}
+        {/* Right Panel: chat */}
         <div className="right-panel">
-            {/* Grey Rectangle Placeholder */}
-            <div className="right-panel-placeholder">
-            {/* Placeholder content for right panel */}
-            <p>Chat</p>
-            </div>
+            <Chat />
         </div>
 
         </div>

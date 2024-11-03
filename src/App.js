@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Sidebar from './components/SideBar';
 import YachtSeries from './components/YachtSeries';
+import YachtModels from './components/YachtModels';
 
 import MainContent from './components/MainContent';
 
@@ -32,12 +33,15 @@ function App() {
             <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
             <div className={`content ${isSidebarOpen ? 'shifted' : ''}`}>
                 <Routes>
-                    <Route path="/" element={<YachtSeries />} />
-                    <Route path="/main-test" element={<MainContent />} />
+                    <Route path="/yachts" element={<YachtSeries />} />
+                    <Route path="/yachts/:seriesId" element={<YachtModels />} />
+                    <Route path="/yachts/:seriesId/:modelID" element={<MainContent />} />
                     <Route path="/linssen-yachts" element={<LinssenYachts />} />
-                    <Route path="/ship-of-thesis" element={<ShipOfThesis />} />
+                    <Route path="/" element={<ShipOfThesis />} />
                     <Route path="/lasering-process" element={<LaseringProcess />} />
                     <Route path="/contact" element={<Contact />} />
+
+
                 </Routes>
             </div>
         </div>

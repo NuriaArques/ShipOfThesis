@@ -1,12 +1,59 @@
+.yacht-series {
+    text-align: left;
+    font-size: large;
+    padding: 10px;
+    height: stretch;
+    width: stretch;
+    align-items: center;
+}
+
+.yacht-cards-container {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.yacht-serie-name{
+    display: flex;
+    width: auto; 
+    margin: 0px 90px 0px 90px;  
+    align-items: center; 
+}
+
+.yacht-series-info{
+    flex: 1;
+    margin-right: 10px;
+}
+
+.right-image-container{
+    width: 200px;
+}
+
+.yacht-cards-models-container {
+    display: flex;
+    gap: 15px;
+    margin: 10px 55px 10px 55px;
+    justify-content: left;
+    background-color: white;
+    border-radius: 24px;
+    overflow-y: auto;
+    flex-wrap: wrap;
+    height: 600px;
+}
+
 .yacht-card {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 20%;
     background-color: #e7e6e6;
     border-radius: 24px;
     margin: 20px;
     padding: 20px;
-    width: 325px;
-    height: 500px;
+    max-width: 365px;
+    max-height: 550px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
+    box-sizing: border-box;
 }
 
 .yacht-image {
@@ -19,33 +66,28 @@
     background-color: rgb(255, 255, 255, 0.4);
     border-radius: 24px;
     margin-top: 20px;
-    /* margin-bottom: 10px; */
-    /* margin: 20px 10px 10px 10px; */
-    padding: 2px 5px 7px 7px;
-    height: 280px;
-    /* align-items: center; */
-    /* width: 100%; */
-    /* text-align: center; */
+    padding: 0px 5px 15px 7px;
+    height: 400px;
 }
 
 .yacht-characteristics {
-    /* border-radius: 24px; */
-    /* margin-top: 20px; */
-    /* margin-bottom: 10px; */
-    /* margin: 20px 10px 10px 10px; */
     padding: 0px 5px;
     font-family: sans-serif;
-    font-size: large;
+    font-size: 17px;
     height: 60%;
-    /* width: 100%; */
-    /* text-align: center; */
+    flex-grow: 1;
+}
+
+.left-align {
+    text-align: left;
+    margin-left: 15px;
 }
 
 .review-button {
-    margin-bottom: 30px;
-    margin-top: 12px;
+    margin-top: auto;
     padding: 20px 30px;
     background-color: #947830;
+    text-decoration: none;
     color: white;
     border: none;
     border-radius: 24px;
@@ -53,7 +95,6 @@
     font-weight: bold;
     font-size: large;
     transition: background-color 0.3s;
-    align-items: end;
 }
 
 .review-button:hover {

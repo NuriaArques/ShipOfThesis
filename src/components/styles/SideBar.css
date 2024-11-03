@@ -3,7 +3,6 @@
     height: 100vh;
     background-color: #002b55;
     color: white;
-    /* padding: 10px; */
     position: fixed;
     top: 0;
     left: -350px;
@@ -33,12 +32,10 @@
     list-style: none;
     padding: 10px;
     margin-top: 150px;
-    /* text-align: center; */
 }
 
 .sidebar ul li {
     margin: 10px 0;
-    /* cursor: pointer; */
 }
 
 .sidebar ul li a {
@@ -56,8 +53,30 @@
 }
 
 .sidebar ul li a.active-link {
-    /* color: #947830; Gold color for highlighting */
     color: white;
     background-color: #466ab0;
+    font-weight: bold;
+}
+
+.sidebar button {
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+}
+
+.sidebar .submenu {
+    list-style-type: none;
+    padding-left: 20px; /* Indent submenu items */
+    margin-top: 2px;
+    background-color: #033e79;
+}
+
+.sidebar .submenu li {
+    margin: 2px 0; /* Add spacing between submenu items */
+}
+
+.sidebar .submenu .active-link {
     font-weight: bold;
 }

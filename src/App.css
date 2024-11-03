@@ -11,22 +11,18 @@ body, html {
   width: auto;
   height: auto;
   display: flex;
-  /* flex-direction: column;  */
-  /* overflow: auto; Prevent child overflow */
 }
 
 .App {
-  font-family: sans-serif, sans-serif;
+  font-family: 'Segoe UI', 'open sans';
   background-color: #f4f4f4;
   width: 100%;
   height: auto;
-  /* display: flex; */
 }
 
 .header {
   display: flex;
   justify-content: space-between;
-  /* padding: 10px 20px; */
   background-color: #002b55;
   width: 100%;
 }
@@ -55,11 +51,8 @@ body, html {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* width: fit-content; */
-  /* height: fit-content; */
   margin: 50px 50px 50px 50px;
   padding: 5px 5px 5px 5px;
-  /* background-color: red; */
   overflow: hidden;
   width: auto;
   height: auto;
