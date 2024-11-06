@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import ThreeDScene from './ThreeDScene';
 
 import Header from './components/Header';
 import Sidebar from './components/SideBar';
@@ -24,6 +25,7 @@ function App() {
   return (
     <Router>
         <div className="App">
+            <ThreeDScene />
             <header className="header">
                 <button onClick={toggleSidebar} className="sidebar-toggle-btn">
                     ☰
@@ -43,6 +45,8 @@ function App() {
 
 
                 </Routes>
+
+            
             </div>
         </div>
     </Router>
