@@ -25,7 +25,6 @@ function App() {
   return (
     <Router>
         <div className="App">
-            <ThreeDScene />
             <header className="header">
                 <button onClick={toggleSidebar} className="sidebar-toggle-btn">
                     ☰
