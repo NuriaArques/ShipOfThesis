@@ -1,0 +1,195 @@
+Identifier: 901242
+First name: Rachel
+Last name: Booker
+
+Identifier: 207074
+First name: Laura
+Last name: Grey
+
+Identifier: 408129
+First name: Craig
+Last name: Johnson
+
+Identifier: 934600
+First name: Mary
+Last name: Jenkins
+
+Identifier: 507916
+First name: Jamie
+Last name: Smith
+
+
+ID: 0
+roughness: 2.27
+readyToPaint: false
+urljpg: XYZ_0.jpg
+
+ID: 1
+roughness: 2.47
+readyToPaint: false
+urljpg: XYZ_1.jpg
+
+ID: 2
+roughness: 2.76
+readyToPaint: true
+urljpg: XYZ_2.jpg
+
+ID: 3
+roughness: 2.68
+readyToPaint: true
+urljpg: XYZ_3.jpg
+
+ID: 4
+roughness: 2.2
+readyToPaint: false
+urljpg: XYZ_4.jpg
+
+ID: 5
+roughness: 2.39
+readyToPaint: false
+urljpg: XYZ_5.jpg
+
+ID: 6
+roughness: 2.5
+readyToPaint: false
+urljpg: XYZ_6.jpg
+
+ID: 7
+roughness: 2.97
+readyToPaint: true
+urljpg: XYZ_7.jpg
+
+ID: 8
+roughness: 2.45
+readyToPaint: false
+urljpg: XYZ_8.jpg
+
+ID: 9
+roughness: 2.63
+readyToPaint: true
+urljpg: XYZ_9.jpg
+
+ID: 10
+roughness: 2.26
+readyToPaint: false
+urljpg: XYZ_10.jpg
+
+ID: 11
+roughness: 2.96
+readyToPaint: true
+urljpg: XYZ_11.jpg
+
+ID: 12
+roughness: 2.98
+readyToPaint: true
+urljpg: XYZ_12.jpg
+
+ID: 13
+roughness: 2.2
+readyToPaint: false
+urljpg: XYZ_13.jpg
+
+ID: 14
+roughness: 2.83
+readyToPaint: true
+urljpg: XYZ_14.jpg
+
+ID: 15
+roughness: 2.86
+readyToPaint: true
+urljpg: XYZ_15.jpg
+
+
+Login email: laura@example.com
+Identifier: 2070
+First name: Laura
+Last name: Grey
+
+Login email: craig@example.com
+Identifier: 4081
+First name: Craig
+Last name: Johnson
+
+Login email: mary@example.com
+Identifier: 9346
+First name: Mary
+Last name: Jenkins
+
+Login email: jamie@example.com
+Identifier: 5079
+First name: Jamie
+Last name: Smith
+
+
+Username: booker12
+Identifier: 9012
+One-time password: 12se74
+Recovery code: rb9012
+First name: Rachel
+Last name: Booker
+Department: Sales
+Location: Manchester
+
+Username: grey07
+Identifier: 2070
+One-time password: 04ap67
+Recovery code: lg2070
+First name: Laura
+Last name: Grey
+Department: Depot
+Location: London
+
+Username: johnson81
+Identifier: 4081
+One-time password: 30no86
+Recovery code: cj4081
+First name: Craig
+Last name: Johnson
+Department: Depot
+Location: London
+
+Username: jenkins46
+Identifier: 9346
+One-time password: 14ju73
+Recovery code: mj9346
+First name: Mary
+Last name: Jenkins
+Department: Engineering
+Location: Manchester
+
+Username: smith79
+Identifier: 5079
+One-time password: 09ja61
+Recovery code: js5079
+First name: Jamie
+Last name: Smith
+Department: Engineering
+Location: Manchester
+
+
+Username: booker12
+Identifier: 9012
+First name: Rachel
+Last name: Booker
+
+Username: grey07
+Identifier: 2070
+First name: Laura
+Last name: Grey
+
+Username: johnson81
+Identifier: 4081
+First name: Craig
+Last name: Johnson
+
+Username: jenkins46
+Identifier: 9346
+First name: Mary
+Last name: Jenkins
+
+Username: smith79
+Identifier: 5079
+First name: Jamie
+Last name: Smith
+
+
