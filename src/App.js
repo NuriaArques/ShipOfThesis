@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import ThreeDScene from './ThreeDScene';
+
 
 import Header from './components/Header';
 import Sidebar from './components/SideBar';
@@ -14,6 +14,26 @@ import LaseringProcess from './components/pages/LaseringProcess';
 import LinssenYachts from './components/pages/LinssenYachts';
 import ShipOfThesis from './components/pages/ShipOfThesis';
 import './App.css';
+
+
+
+/*
+
+import { useLoader } from '@react-three/fiber';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+function MyComponent() {
+    const gltf = useLoader(GLTFLoader, '/path/to/your/model.gltf');
+
+    return (
+        <primitive object={gltf.scene} />
+    );
+}
+// can display 2d and 3d scenes
+// renders the model to a canvas
+<Canvas>
+    <MyComponent />
+</Canvas>
+*/
 
 function App() {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -41,8 +61,6 @@ function App() {
                     <Route path="/" element={<ShipOfThesis />} />
                     <Route path="/lasering-process" element={<LaseringProcess />} />
                     <Route path="/contact" element={<Contact />} />
-
-
                 </Routes>
 
             

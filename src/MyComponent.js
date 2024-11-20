@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
-import Popup3D from 'C:/Users/Fred/OneDrive/Documents/GitHub/ShipOfThesis/src/Popup3D'; // Assuming Popup3D.js is in the same directory
+import Popup3D from 'C:/Users/Fred/OneDrive/Documents/GitHub/ShipOfThesis/src/Popup3D';
 
-Modal.setAppElement('#root'); // Set the app element for accessibility
+Modal.setAppElement('#root');
 
-function LaseringProcess() {
+function MyComponent() {
   const [showModal, setShowModal] = useState(false);
 
   const handleOpenModal = () => {
@@ -16,10 +16,8 @@ function LaseringProcess() {
   };
 
   return (
-    <div className="page">
-      <h1>Lasering Process</h1>
-      <p>This is the Lasering Process page.</p>
-      <button onClick={handleOpenModal}>Show 3D Model</button>
+    <div>
+      <button onClick={handleOpenModal}>Open Modal</button>
       <Modal
         isOpen={showModal}
         onRequestClose={handleCloseModal}
@@ -45,4 +43,4 @@ function LaseringProcess() {
   );
 }
 
-export default LaseringProcess;
+export default MyComponent;
