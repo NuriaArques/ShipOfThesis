@@ -1,1 +1,7 @@
 npm
+flask
+PyPDF2
+google-generativeai
+flask-cors 
+concurrent
+python-dotenv

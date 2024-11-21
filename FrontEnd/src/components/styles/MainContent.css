@@ -1,0 +1,297 @@
+/* Main content layout */
+.main-content {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  padding: 2vh 2vh 0vh 2vh;
+  font-family: 'Open Sans';
+  overflow-y: hidden;
+  align-items: center;
+  object-fit: cover;
+  position: static;
+}
+
+/* Left panel (42% of the screen) */
+.left-panel {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  margin-right: 30px;
+  height: stretch;
+  overflow: hidden;
+  justify-content: center;
+}
+
+/* Info + 3D section (60% of the left panel) */
+.info-3d-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 65%; 
+  gap: 20px;
+  background-color: white;
+  border-radius: 24px;   /* Round edges */
+  margin-bottom: 20px;
+}
+
+/* Boat information (upper side in the info-3d-container) */
+.boat-info {
+  padding: 3vh 1vw 0vh 0vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 20%;
+  width: 100%;
+  margin: 1vh 0.5vw;
+}
+
+/* Boat information (right side in the info-3d-container) */
+.boat-characteristics {
+  padding: 1px 0px 0px 20px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 60%;
+  height: 20%;
+}
+
+.boat-characteristics p {
+  margin: 3px; 
+  padding: 0px; 
+  line-height: 1; 
+}
+
+/* Boat image (left side in the info-3d-container) */
+.boat-image {
+  display: flex;
+  align-items: right;
+  justify-content: center;
+  width: 30%;
+  padding: 2vh 1vw;
+}
+
+.boat-image img {
+  max-width: 100%; /* Keep the image responsive */
+  height: auto;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+/* 3D visualization below the info and image */
+.three-d-visualization {
+  height: 60%; 
+  margin: 1vh 1vw 2vh;
+  display: flex;
+  align-items: center;
+  border: 1px solid black; /* Add a border for the 3D placeholder */
+  border-radius: 20px;   /* Round edges */
+}
+
+.three-d-visualization img {
+  width: 100%; 
+  height: stretch;
+  object-fit: cover;
+  border-radius: 20px; 
+}
+
+/* Report download (20% of the left panel) */
+.pdf-report {
+  height: 35%; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1vh;
+  border-radius: 20px;   /* Round edges */
+}
+
+.pdf-report-header {
+  padding: 0vw 5%;
+  width: 100%;
+  height: 4vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #002b55; /* Background color */
+  color: white; /* Text color */
+  border-radius: 20px 20px 0 0;   /* Round edges */
+}
+
+.pdf-report-header span {
+  flex-grow: 1;
+  font-weight: bold;
+}
+
+.pdf-report-buttons {
+  display: flex; /* Align buttons horizontally */
+  align-items: right;
+  justify-content: right;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 0;
+}
+
+.pdf-report iframe {
+  width: 100%;
+  height: stretch;
+  border: none; 
+  border-radius: 0 0 20px 20px; 
+}
+
+
+/* Right panel (58% of the screen) */
+.right-panel {
+  flex: 1;
+  display: flex;
+  height: 100%;
+  width: stretch;
+  background-color: #e7e6e6;
+  display: flex;
+  justify-content: center;
+  border-radius: 20px;   /* Round edges */
+  position: relative;
+  overflow: hidden;
+  flex-direction: column;
+  align-items: center;
+}
+
+.background_img {
+  opacity: 0.01;
+  margin: 2vw;
+  /* position: relative; */
+  align-items: center;
+  justify-content: center;
+  z-index: -1;
+}
+
+.background_img img{
+  width: auto;
+  height: 90%;
+  padding: 2vh;
+  object-fit: cover;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Chat Component */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 10px 12px 10px;
+  height: 97%;
+  width: stretch;
+  border-radius: 31px;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 10px;
+  margin: 10px 15px 12px 15px;
+  overflow-y: auto; /* Scrolling within the messages area */
+  overflow-wrap: anywhere;
+  margin-bottom: 10px;
+  max-height: 70vh;
+}
+
+.chat-message {
+  padding: 8px 10px;
+  margin: 5px 0;  
+  word-break: normal;  
+}
+
+.chat-message.user {
+  align-self: flex-end;
+  color: #002b55;
+  text-align: right;
+  font-weight: bold;
+  padding-left: 5vh;
+  padding-right: 3vh;
+  flex-direction: row-reverse;
+}
+
+.chat-message.bot {
+  align-self: flex-start;
+  color: black;
+  align-content: right;
+  margin-bottom: 30px;
+  text-align: justify;
+  padding-right: 5vh;
+  padding-left: 3vh;
+  flex-direction: row;
+}
+
+.chat-icon{
+  flex-shrink: 0; /* Prevent shrinking of the icon */
+  height: 3vh;
+  display: flex;
+  /* align-items: center; */
+  /* justify-content: center;  */
+}
+
+.chat-input {
+  display: flex;
+  padding: 7px;
+  border-radius: 24px;
+  border: none;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 15px 25px;
+  background-color: #b2b1b1;
+  border-radius: 24px;
+  outline: none;
+  border: none;
+  font-size: 15px;
+  margin-left: 10px;
+}
+
+.chat-input button {
+  margin-left: 10px;
+  padding: 0px 12px 2px 15px;
+  border: none;
+  background-color: #947830;
+  color: white;
+  border-radius: 100px;
+  cursor: pointer;
+  font-size: 18px;
+  align-items: center;
+}
+
+.chat-input button:hover {
+  background-color: #815a30;
+}
+
+
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .main-content {
+      flex-direction: column;
+      width: stretch; /* Take full width on smaller screens */
+      height: stretch;
+      padding: 10px; /* Adjust padding if necessary */
+  }
+
+  .left-panel, .right-panel {
+    width: 100%;
+    height: 100%;
+    margin-right: 0;
+    margin-top: 0;
+  }
+
+  .info-3d-container {
+    flex-direction: row;
+    /* height: auto; */
+  }
+
+  .three-d-visualization {
+    margin-top: 10px;
+  }
+}

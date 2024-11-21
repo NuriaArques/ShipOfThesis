@@ -1,0 +1,95 @@
+/* Header.css */
+
+/* General styles for the header */
+.header {
+    display: flex;                      /* Flexbox to layout logos and title */
+    justify-content: center;     /* Space out the elements */
+    align-items: center;                /* Align logos and text vertically */
+    background-color: #002b55;          /* Dark blue background */
+    z-index: 1;
+    width: 100%;
+}
+
+/* Rectangle container for the logo with rounded edges */
+.rectangle-container {
+    background-color: white;            /* White background for the rectangle */
+    border-radius: 50px;                /* Rounded edges */
+    padding: 1vh 2vw;                  /* Lateral padding */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    height: fit-content;
+}
+
+/* Rectangle logo styles */
+.rectangle-container img {
+    height: 4vh;  
+    width: auto;
+}
+
+/* Triangle container for the inverted triangle with rounded edges */
+.triangle-container {
+    position: relative;                 /* Positioned relative to allow the triangle to overlap */
+    width: 22vw;                       /* Adjusted width to match the design */
+    height: 6.7vh;                       /* Adjust height to match the design */
+    margin: 0 32vw;                     /* Center the triangle in the header */
+    z-index: 2;
+    align-items: center;
+}
+
+/* Create an inverted triangle */
+.triangle-container::before {
+    content: '';
+    position: absolute;
+    top: -1vh;
+    left: 0;
+    right: 0;
+    bottom: -2.5vh;
+    background-color: white;            /* White background for triangle */
+    clip-path: polygon(50% 100%, 0 0, 100% 0); /* Inverted triangle shape */
+    z-index: -1;                         /* Behind the logo */
+    height: 275%;                       /* Ensure it fills the container */
+}
+
+/* Logo image styles */
+.triangle-container img {
+    position: relative;                 /* To center the logo inside the triangle */
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);        /* Center horizontally */
+    height: 15vh;                   /* Adjust height as needed */
+    width: auto;                        /* Maintain aspect ratio */
+    z-index: 1;                         /* On top of the triangle */
+}
+
+/* Title in the center of the header */
+.header .title {
+    font-size: 1.5rem;
+    color: white;                       /* White text color */
+    text-transform: uppercase;          /* Make the text uppercase */
+    margin: 0 15px;                          /* No margin around the title */
+    text-align: center;
+    font-weight: bold;                  /* Bold font */
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+    .header {
+        flex-direction: column;         /* Stack elements vertically */
+        padding: 3vh 3vw;
+    }
+
+    .triangle-container {
+        width: 25vw;                    /* Adjust triangle width for mobile */
+        height: 8vh;                   /* Adjust triangle height for mobile */
+    }
+
+    .triangle-container img {
+        height: 2vh;
+    }
+
+    .title {
+        font-size: 1.2rem;              /* Adjust title font size for smaller screens */
+    }
+}
