@@ -15,7 +15,7 @@
   },
   "scripts": {
     "start": "concurrently \"npm run FrontEnd\" \"npm run BackEnd\"",
-    "FrontEnd": "cd FrontEnd && react-scripts start",
+    "FrontEnd": "cd FrontEnd && react-scripts --openssl-legacy-provider start",
     "BackEnd": "cd BackEnd && python LLM-chatbot.py",
     "build": "react-scripts build",
     "test": "react-scripts test",
