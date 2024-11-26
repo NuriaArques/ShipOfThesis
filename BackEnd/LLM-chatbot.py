@@ -72,4 +72,4 @@ def chat_with_model():
         return jsonify({"error": "Error processing the message"}), 500
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=True)
