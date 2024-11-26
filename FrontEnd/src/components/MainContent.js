@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './styles/MainContent.css';
 import Chat from './pages/Chat';
+import RotatingBoxes from './boxes';
 
 function MainContent() {
     const { seriesId, modelID } = useParams();
@@ -106,7 +107,8 @@ function MainContent() {
 
                     {/* 3D Viewer Section (Below Info and Image) */}
                     <div className="three-d-visualization">
-                        <img src='/img/3Dexample.jpg' alt="3D structure" />
+                        {/* <img src='/img/3Dexample.jpg' alt="3D structure" /> */}
+                        <RotatingBoxes />
                     </div>
                 </div>
 
