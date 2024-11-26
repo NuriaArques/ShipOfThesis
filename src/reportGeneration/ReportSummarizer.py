@@ -4,7 +4,8 @@ summarizer = pipeline("summarization", model="philschmid/bart-large-cnn-samsum")
 def createSummary (input_data):
     # Creates Summary, num_beams = higher value - better summary - slower output 
     # Also we should tweak max and min length
-    summary = summarizer(input_data, num_beams=10)
+    text = input_data.split()
+    summary = summarizer(input_data, num_beams=10, max_length = int(len(text)), min_length = int(len(text)/3))
     summary_text = summary[0]['summary_text']
     return summary_text
 
