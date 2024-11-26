@@ -97,7 +97,8 @@ function Chat({ seriesId, modelID }) {
                     <div key={index} className={`chat-message ${msg.type}`}>
                         
                         {msg.type === "bot" ? (
-                            <img className="chat-icon" src='/logo_SoT_background.png' alt='llm-icon'/> // Bot Icon
+                            // <div className="user-icon">👤</div>
+                            <img className="chat-icon" src='/img/logo_SoT_background.png' alt='llm-icon'/> // Bot Icon
                         ) : (
                             <div className="user-icon">👤</div> // User Icon
                         )}

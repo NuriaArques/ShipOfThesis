@@ -5,10 +5,10 @@ function Header() {
   return (
     <header className="header">
       <div className="triangle-container"> {/* Added class for the triangle */}
-        <img src='/logo_SoT.png' alt="Ship of Thesis Logo"/>
+        <img src='/img/logo_SoT.png' alt="Ship of Thesis Logo"/>
       </div>
       <div className="rectangle-container">
-        <img src='/logo_LY.svg' alt="Linssen Yachts Logo" />
+        <img src='/img/logo_LY.svg' alt="Linssen Yachts Logo" />
       </div>
     </header>
   );

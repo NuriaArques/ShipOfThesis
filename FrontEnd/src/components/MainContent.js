@@ -70,7 +70,7 @@ function MainContent() {
         }
     }, [seriesId, modelID, ymodel]);
 
-    
+
     return (
         <div className="main-content">
         
@@ -106,7 +106,7 @@ function MainContent() {
 
                     {/* 3D Viewer Section (Below Info and Image) */}
                     <div className="three-d-visualization">
-                        <img src='/3Dexample.jpg' alt="3D structure" />
+                        <img src='/img/3Dexample.jpg' alt="3D structure" />
                     </div>
                 </div>
 
@@ -137,7 +137,7 @@ function MainContent() {
             {/* Right Panel: chat */}
             <div className="right-panel">
                 <div className="background_img">
-                    <img src="/logo_SoT_background.png" alt="Background" />
+                    <img src="/img/logo_SoT_background.png" alt="Background" />
                 </div>
                 {ymodel ? (
                     <>
