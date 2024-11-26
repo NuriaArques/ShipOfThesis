@@ -16,7 +16,7 @@
   "scripts": {
     "start": "concurrently \"npm run FrontEnd\" \"npm run BackEnd\"",
     "FrontEnd": "cd FrontEnd && react-scripts start",
-    "BackEnd": "cd BackEnd && python LLM-chatbot.py",
+    "BackEnd": "python .\\BackEnd\\LLM-chatbot.py",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

@@ -1,0 +1,140 @@
+  .container {
+    display: flex;
+    height: 83vh;
+    width: 100%;
+    margin: 0.8vw;
+    border-radius: 24px;
+    gap: 1.5vw;
+  }
+
+  .text {
+    padding: 3vh;
+    padding-bottom: 0;
+    margin-top: 0;
+    text-align: justify;
+    margin-bottom: 0;
+  }
+  
+  .left-side {
+    padding: 5vh;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 24px;
+    position: relative;
+    background-color: #01182f;
+  }
+
+  .left-side-info{
+    background-color: rgb(255, 255, 255, 0.9);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+    border-radius: 24px;
+    padding: 2vw;
+    width: 100%;
+    height: 100%;
+  }
+
+  .left-side-background{
+    width: 100%;
+    height: 100%;
+    opacity: 0.6;
+    position: absolute;
+    object-fit: cover;
+    z-index: 0;
+    border-radius: 24px;
+  }
+  
+  .right-side {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0px 24px 24px 0px;
+  }
+  
+  .upper-right {
+    flex: 1;
+    height: 60%;
+    padding: 5vh;
+    background-color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 24px 24px 0px 0px;
+  }
+
+  .upper-right-info{
+    background-color: rgb(255, 255, 255, 0.8);
+    width: 100%;
+    height: 100%;
+    border-radius: 24px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .lower-right {
+    margin-top: 0.5vh;
+    height: 30%;
+    background-color: #022445;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    border-radius: 0px 0px 24px 24px;
+    border: 5px solid white;
+  }
+
+  .lower-right img {
+    width: 100%;
+    height: 100%;
+    opacity: 0.4;
+    position: absolute;
+    object-fit: cover;
+    z-index: 3;
+    border-radius: 0px 0px 24px 24px;
+  }
+  
+  .logo {
+    width: 100px; 
+    height: auto;
+    padding: 0;
+    margin: 0;
+    position: relative;
+  }
+  
+  .button {
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    padding: 2vh 2.7vw;
+    background-color: #947830;
+    text-decoration: none;
+    color: white;
+    border: none;
+    border-radius: 24px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: large;
+    transition: background-color 0.3s;
+    z-index: 100;
+}
+
+.button:hover {
+    background-color: #815a30;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 1000px) {
+  .text {
+    font-size: smaller;
+    padding: 1vh;
+  }
+}

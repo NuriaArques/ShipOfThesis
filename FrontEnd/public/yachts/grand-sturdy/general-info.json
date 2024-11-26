@@ -1,0 +1,12 @@
+{
+    "id": "grand-sturdy",
+    "name": "Linssen Grand Sturdy series",
+    "image": "/linssen-grand-sturdy.webp",
+    "dimensions": "9-14 m / 30'- 45' ft",
+    "models": [
+        "grand-sturdy-30-ac",
+        "grand-sturdy-30-sedan",
+        "grand-sturdy-35-ac",
+        "grand-sturdy-35-sedan"
+    ]
+}
