@@ -1,7 +1,8 @@
 .yacht-series {
     text-align: left;
     font-size: large;
-    padding: 0vh;
+    padding: 0;
+    margin: 0;
     height: 100%;
     width: 100%;
     align-items: center;
@@ -16,13 +17,14 @@
 .yacht-serie-name{
     display: flex;
     width: auto; 
-    margin: 0px 5vw 0px 5vw;  
+    margin: 0px 5vw 0px 5vh;  
     align-items: center; 
 }
 
 .yacht-series-info{
     flex: 1;
     margin-right: 7vh;
+    margin-left: 5vh;
 }
 
 .right-image-container{
@@ -32,7 +34,7 @@
 .yacht-cards-models-container {
     display: flex;
     gap: 1vw;
-    margin: 0.8vw 8vh;
+    margin: 0.8vw 7vh;
     justify-content: left;
     background-color: white;
     border-radius: 24px;
@@ -50,7 +52,7 @@
     margin: 2vh;
     padding: 2vh;
     width: 50vw;
-    height: 60vh;
+    height: 58vh;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     justify-content: center;
@@ -67,8 +69,8 @@
     background-color: rgb(255, 255, 255, 0.4);
     border-radius: 24px;
     margin-top: 2vh;
-    padding: 0px 0.2vh 1vh 0.2vh;
-    height: 39vh;
+    padding: 0.5vh;
+    height: 37vh;
 }
 
 .yacht-characteristics {
@@ -76,7 +78,7 @@
     font-family: sans-serif;
     font-size: 1.8vh;
     flex-grow: 1;
-    margin-bottom: 5vh;
+    margin-bottom: 2vh;
 }
 
 .left-align {
@@ -85,8 +87,9 @@
 }
 
 .review-button {
-    margin-top: 3vh;
-    margin-bottom: 1vh;
+    /* margin-top: 3vh; */
+    flex: 1;
+    margin: 1vh;
     padding: 2vh 2.7vw;
     background-color: #947830;
     text-decoration: none;
@@ -105,11 +108,15 @@
 }
 
 
-@media (max-width: 1024px) {
+@media (max-width: 1224px) {
+    .yacht-series{
+        margin-top: 10vh;
+    }
+
     .yacht-card {
         flex: 1 1 calc(45% - 2vh); /* Decrease card size */
         width: 40vw;
-        height: 50vh;
+        height: 58vh;
     }
 
     .yacht-characteristics {
@@ -125,7 +132,7 @@
 
 @media (max-width: 768px) {
     .yacht-card {
-        flex: 1 1 calc(90% - 2vh); /* Full-width on smaller screens */
+        flex: 1 1 calc(45% - 3vh);; /* Full-width on smaller screens */
         width: 80vw;
         height: 45vh;
     }

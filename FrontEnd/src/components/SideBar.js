@@ -30,7 +30,6 @@ function Sidebar({ isOpen, toggleSidebar }) {
             <ul>
                 
                 <li><Link to="/" onClick={toggleSidebar} className={location.pathname === '/ship-of-thesis' ? 'active-link' : ''}>Ship of Thesis</Link></li>
-                <li><Link to="/linssen-yachts" onClick={toggleSidebar} className={location.pathname === '/linssen-yachts' ? 'active-link' : ''}>Linssen Yachts</Link></li>
                 <li>
                     <Link to="/yachts" onClick={(e) => {e.preventDefault(); handleYachtsClick();}} className={isYachtsActive ? 'active-link' : ''}>Yachts</Link>
                     {isSubmenuOpen && (

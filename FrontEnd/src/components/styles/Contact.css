@@ -1,0 +1,128 @@
+
+.contact-content {
+    flex: 1;
+    padding: 5vh;
+    align-items: center;
+    justify-content: center; 
+    margin: 10vh;
+    background-color: white;
+    height: 85%;
+    width: 95%;
+    border-radius: 24px;
+  }
+  
+  .contact-content h1 {
+    font-size: 2rem;
+    color: #002b55;
+    margin-bottom: 3vh;
+  }
+  
+  .contact-content p {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+  }
+  
+  .content-intro {
+    justify-content: space-between; 
+    display: flex;
+    padding: 1vw;
+    align-items: center;
+    width: 100%;
+    gap: 5vw
+  }
+
+  .logo {
+    width: 50vw;
+    height: auto;
+    margin-right: 5vw;
+  }
+  
+  .contact-cards {
+    margin-top: 10vh;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+  
+  .contact-card {
+    background: #e7e6e6;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 2vh;
+    width: calc(33.33% - 20px); /* Three cards per row on large screens */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+  }
+
+  .contact-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .card-info {
+    background-color: rgb(255, 255, 255, 0.8);
+    border-radius: 20px;
+    padding: 1vw;
+    padding-left: 2vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%
+  }
+
+  .contact-info{
+    display: flex;
+    flex-direction: column;
+    max-width: 80%;
+  }
+  
+  .contact-card h2 {
+    color: #002b55;
+    margin-bottom: 10px;
+  }
+  
+  .contact-card p {
+    font-size: 1.2rem;
+  }
+
+  .info-icon {
+    font-size: 2rem; 
+    margin-right: 1vh;
+  }
+  
+
+  @media (max-width: 1024px) {
+    .contact-card {
+      width: calc(50% - 20px);
+    }
+
+    .contact-card h2{
+        font-size: large;
+    }
+    
+    .contact-card p{
+        font-size: medium;
+    }
+
+    .info-icon{
+        font-size: large;
+        margin-right: 0.5vh;
+    }
+
+    .card-info {
+        width: 100%;
+      }
+  }
+  
+  @media (max-width: 768px) {
+    .contact-card {
+      width: 100%;
+    }
+
+    .contact-card p{
+        font-size: smaller;
+    }
+
+    .card-info {
+        width: 100%;
+      }
+  }

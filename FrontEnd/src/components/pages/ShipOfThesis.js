@@ -1,32 +1,39 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/ShipOfThesis.css'
 
 function ShipOfThesis() {
     return (
         <div className="container">
             <div className="left-side">
-                <img src="logo_LY.svg" alt="Linssen Yachts Logo" className="logo" />
-                <h1>Linssen Yachts</h1>
-                <p>Linssen Yachts is a renowned manufacturer of luxury motor yachts.</p>
-                <a href="https://www.linssenyachts.com" className="button" target="_blank" rel="noopener noreferrer">Visit Linssen Yachts</a>
+                <img src="LY_wallpaper.jpeg" alt="Linssen Yachts Logo" className='left-side-background'/>
+                <div className="left-side-info">
+                    <img src="logo_LY.svg" alt="Linssen Yachts Logo" className="logo" />
+                    <h1>Linssen Yachts</h1>
+                    <div className='text' style={{fontWeight: 'bold'}}> 
+                        Linssen Yachts builds luxury steel motor yachts in the 9-16 metre segment and has grown into a market leader in steel yacht building.
+                    </div>
+                    <div className='text'>
+                        Linssen Yachts stands for steel motor yachts - cabin cruisers displacement yachts - with superior quality and for continuous innovative product and process development. 
+                        Since the company was founded in 1949, Linssen Yachts has been the driving force behind innovative improvements in yacht building.
+                    </div>
+                    <a href="https://www.linssenyachts.com" className="button" target="_blank" rel="noopener noreferrer">Visit Linssen Yachts</a>
+                </div>
             </div>
             <div className="right-side">
                 <div className="upper-right">
-                    <img src="/logo_SoT.png" alt="Ship of Thesis Logo" className="logo" />
-                    <h1>Ship of Thesis</h1>
-                    <p>We specialize in ....</p>
+                    <div className='upper-right-info'>
+                        <img src="/logo_SoT.png" alt="Ship of Thesis Logo" className="logo" />
+                        <h1>Ship of Thesis</h1>
+                        <p>We specialize in ....</p>
+                    </div>
                 </div>
                 <div className="lower-right">
-                    <img src="/logo_SoT.png" alt="Ship of Thesis Logo" className="background_img" />
-                    <a href="/catalog" className="button">View Yacht Catalog</a>
+                    <img src="/ocean.jpg" alt="Ship of Thesis Logo" />
+                    <Link to="/yachts" className="button">View Yacht Catalog</Link>
                 </div>
             </div>
         </div>
-        // <div className="page">
-        //     <h1>Ship of Thesis</h1>
-        //     <p>This is the Ship of Thesis page.</p>
-        //     <img className='backgroung_img' src="/logo_SoT.png" alt="SOF_logo" />
-        // </div>
     );
 }
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import './styles/YachtCard.css';
+import '../styles/YachtCard.css';
 
 function YachtCard({ yacht, basePath }) {
 
@@ -26,12 +26,8 @@ function YachtCard({ yacht, basePath }) {
                         {yacht.releaseDate && <p>Release date: {yacht.releaseDate} </p>}
                     </div>
                 </div>
-                
-                {basePath === "/yachts" ? (
-                    <Link to={`${basePath}/${yacht.id}`} className="review-button">REVIEW</Link>
-                ) : (
-                    <button className="review-button" onClick={handleReviewClick}>REVIEW</button>
-                )}
+                <button className="review-button" onClick={handleReviewClick}>REVIEW</button>
+
             </div>
         </div>
     );
