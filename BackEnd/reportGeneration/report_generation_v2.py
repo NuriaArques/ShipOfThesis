@@ -152,7 +152,7 @@ def generatePrettyReport(finalString, modelOutput):
 
     # Save the document as a PDF
     try:
-        document.SaveToFile("BackEnd/reportGeneration/data/report_with_picture.pdf", FileFormat.PDF)
+        document.SaveToFile("FrontEnd\public\yachts\grand-sturdy\grand-sturdy-30-ac\Report_GS30AC_12-2024.pdf", FileFormat.PDF)
         document.Close()
         print("PDF Report successfully generated!")
     except Exception as e:
