@@ -41,5 +41,6 @@ This yacht has been carefully maintained to the highest standards, with its most
 
 # Call Function
 # Better to parse data in places where you want it to create its own summary
-summary = createSummary(input_3)
-print(summary)
+
+#summary = createSummary(input_3)
+#print(summary)
