@@ -10,7 +10,7 @@ const Contact = () => {
                 <p style={{ margin: 1.5 }}>We'd love to hear from you! </p>
                 <p style={{ margin: 0 }}>Please reach out to us using the details below.</p>
             </div>
-            <img src="/logo_SoT.png" alt="Ship of Thesis Logo" className="logo"/>
+            <img src="/img/logo_SoT.png" alt="Ship of Thesis Logo" className="logo"/>
         </div>
 
         <div className="contact-cards">
