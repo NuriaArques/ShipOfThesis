@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './styles/MainContent.css';
 import Chat from './pages/Chat';
-import Boat from './boat';
+import Boat from './pages/boat';
 
 function MainContent() {
     const { seriesId, modelID } = useParams();
@@ -53,12 +53,12 @@ function MainContent() {
                             },
                             body: JSON.stringify({ path: reportPath })
                         });
-                        console.log("Upload Response:", uploadResponse);
+                        
                         if (!uploadResponse.ok) {
                             throw new Error(`Failed to upload PDF: ${uploadResponse.statusText}`);
                         }
                         const data = await uploadResponse.json();
-                        console.log(data.message); 
+                         
                     } catch (error) {
                         console.error("Error sending PDF:", error);
                     }
@@ -107,7 +107,6 @@ function MainContent() {
 
                     {/* 3D Viewer Section (Below Info and Image) */}
                     <div className="three-d-visualization">
-                        {/* <img src='/img/3Dexample.jpg' alt="3D structure" /> */}
                         <Boat />
                     </div>
                 </div>

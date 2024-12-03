@@ -46,9 +46,10 @@
   height: 20%;
   width: 100%;
   margin: 1vh 0.5vw;
+  position: relative;
 }
 
-/* Boat information (right side in the info-3d-container) */
+/* Boat information (left side in the info-3d-container) */
 .boat-characteristics {
   padding: 1px 0px 0px 20px;
   text-align: left;
@@ -57,15 +58,21 @@
   justify-content: center;
   width: 60%;
   height: 20%;
+  object-fit: cover;
 }
 
 .boat-characteristics p {
-  margin: 3px; 
-  padding: 0px; 
-  line-height: 1; 
+  margin: 0.2vh; 
+  padding: 0; 
+  line-height: 0.8; 
+  font-size: 1rem;
 }
 
-/* Boat image (left side in the info-3d-container) */
+.boat-characteristics h1 {
+  font-size: 1.9rem;
+}
+
+/* Boat image (right side in the info-3d-container) */
 .boat-image {
   display: flex;
   align-items: right;
@@ -89,23 +96,19 @@
   align-items: center;
   border: 1px solid black; /* Add a border for the 3D placeholder */
   border-radius: 20px;   /* Round edges */
+  box-shadow: 1vh 1vh 1.5vh rgba(0, 0, 0, 0.2);
 }
 
-.three-d-visualization img {
-  width: 100%; 
-  height: stretch;
-  object-fit: cover;
-  border-radius: 20px; 
-}
 
 /* Report download (35% of the left panel) */
 .pdf-report {
-  height: 35%; 
+  /* height: 35%;  */
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 1vh;
+  margin-top: 0.2vh;
   border-radius: 20px;   /* Round edges */
 }
 
@@ -130,9 +133,10 @@
   display: flex; /* Align buttons horizontally */
   align-items: right;
   justify-content: right;
-  gap: 10px;
-  font-size: 18px;
+  gap: 2vh;
+  object-fit: cover;
   font-weight: 0;
+  height: 100%;
 }
 
 .pdf-report iframe {
@@ -172,7 +176,7 @@
 .chat-container {
   display: flex;
   flex-direction: column;
-  margin: 10px 10px 12px 10px;
+  margin: 1vh 0.5vh 0.5vh 0.5vh;
   height: 100%;
   width: stretch;
   border-radius: 31px;
@@ -269,28 +273,18 @@
       padding: 10px; 
   }
 
-  .boat-info{
-    font-size: smaller;
-  }
-
   .boat-characteristics p{
     display: none;
   }
 
   .left-panel{
     width: 30%;
+    font-size: small;
   }
 
   .right-panel{
     flex: 1;
   }
-
-  /* .left-panel, .right-panel {
-    width: 100%;
-    height: 100%;
-    margin-right: 0;
-    margin-top: 0;
-  } */
 
   .three-d-visualization {
     margin-top: 10px;

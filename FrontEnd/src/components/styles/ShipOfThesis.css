@@ -16,8 +16,8 @@
   }
   
   .left-side {
-    padding: 5vh;
-    width: 40%;
+    padding: 4vh;
+    width: 32%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -38,6 +38,7 @@
     padding: 2vw;
     width: 100%;
     height: 100%;
+    object-fit: cover;
   }
 
   .left-side-background{
@@ -51,16 +52,15 @@
   }
   
   .right-side {
-    width: 60%;
+    flex: 1;
     display: flex;
     flex-direction: column;
     border-radius: 0px 24px 24px 0px;
   }
   
   .upper-right {
-    flex: 1;
-    height: 60%;
-    padding: 5vh;
+    height: 80%;
+    padding: 4vh;
     background-color: #e0e0e0;
     display: flex;
     flex-direction: column;
@@ -78,11 +78,13 @@
     justify-content: center;
     display: flex;
     flex-direction: column;
+    padding: 2vw;
+    object-fit: cover;
   }
   
   .lower-right {
     margin-top: 0.5vh;
-    height: 30%;
+    flex: 1;
     background-color: #022445;
     display: flex;
     justify-content: center;

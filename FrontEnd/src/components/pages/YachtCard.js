@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../styles/YachtCard.css';
 
 function YachtCard({ yacht, basePath }) {
@@ -25,8 +25,8 @@ function YachtCard({ yacht, basePath }) {
                         {yacht.beds && <p>Beds: {yacht.beds} </p>}
                         {yacht.releaseDate && <p>Release date: {yacht.releaseDate} </p>}
                     </div>
+                    <button className="review-button" onClick={handleReviewClick}>REVIEW</button>
                 </div>
-                <button className="review-button" onClick={handleReviewClick}>REVIEW</button>
 
             </div>
         </div>
