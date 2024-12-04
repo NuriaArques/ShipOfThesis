@@ -6,6 +6,7 @@ import requests
 import os
 import io
 from dotenv import load_dotenv
+import fitz
 
 app = Flask(__name__)
 CORS(app, origins=['http://127.0.0.1:3000', 'http://localhost:3000']) # Allow app origins
@@ -25,12 +26,13 @@ def extract_text_from_pdf(pdf_stream):
             extracted_text += text
     return extracted_text
 
-extracted_context = ""
+extracted_context_text= ""
+extracted_context_image = None
 
 
 @app.route('/report', methods=['POST'])
 def read_pdf():
-    global extracted_context
+    global extracted_context_text
     data = request.get_json()
     pdf_path = data.get('path') 
     frontend_base_url = str(os.getenv("FRONTEND_URL"))
@@ -43,7 +45,13 @@ def read_pdf():
 
         # Extract text from PDF stream
         pdf_stream = io.BytesIO(response.content)
-        extracted_context = extract_text_from_pdf(pdf_stream)
+        extracted_context_text= extract_text_from_pdf(pdf_stream)
+        
+        # Extract visuals from PDF path
+        doc = fitz.open(pdf_path)
+        page = doc.load_page(0)
+        pixmap = page.get_pixmap(dpi=300)
+        img = pixmap.tobytes()
 
         return jsonify({"message": "PDF downloaded successfully", "file_path": pdf_url}), 200
     except requests.exceptions.RequestException as e:
@@ -52,15 +60,17 @@ def read_pdf():
 
 @app.route('/chat', methods=['POST'])
 def chat_with_model():
-    global extracted_context
+    global extracted_context_text
+    global extracted_context_image
     user_message = request.json.get("message", "")
     if not user_message:
         return jsonify({"error": "No message provided"}), 400
     
     chat = model.start_chat(
         history=[
-            {"role": "user", "parts": ["For all subsequent queries, use this file for context: ", extracted_context]},
-            {"role": "user", "parts": "Keep responses to 100 words or less."},
+            {"role": "user", "parts": ["For all subsequent queries, use this file for context: ", extracted_context_text]},
+            {"role": "user", "parts": ["The file also includes these images: ", extracted_context_image]},
+            {"role": "user", "parts": "Keep responses to 100 words or less."}
         ]
     )
 
