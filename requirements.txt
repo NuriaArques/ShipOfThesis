@@ -6,3 +6,5 @@ flask-cors
 concurrent
 python-dotenv
 reportlab
+PyMuPDF
+pillow
