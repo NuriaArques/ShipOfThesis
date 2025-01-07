@@ -62,6 +62,9 @@ f.close()
 
 def generateReport(finalString, modelOutput, path):
 
+    #Library doesnt interpret \n as next line
+    modelOutput = modelOutput.replace("\n", "<br/>")
+
     # Create PDF document with path
     doc = SimpleDocTemplate(path, pagesize=letter)
     

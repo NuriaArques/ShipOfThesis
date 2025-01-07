@@ -7,6 +7,8 @@ import Boat from './pages/boat';
 function MainContent() {
     const { seriesId, modelID } = useParams();
     const [ymodel, setYmodel] = useState(null);
+    const [isImageProcessingComplete, setIsImageProcessingComplete] = useState(false);
+
     
     useEffect(() => {
         // Fetch yacht data when the component mounts or parameters change
@@ -68,6 +70,82 @@ function MainContent() {
                 }
             }
             uploadPDF(`/yachts/${seriesId}/${modelID}${ymodel.report}`);
+        }
+    }, [seriesId, modelID, ymodel]);
+
+
+    useEffect(() => {
+        if (ymodel) {
+            // Function to upload images
+            async function uploadIMG(imgPath) {
+                try {
+                    // Fetch the list of image files
+                    // const imageListResponse = await fetch(`/yachts/${seriesId}/${modelID}/img/list`);
+                    // if (!imageListResponse.ok) {
+                    //     throw new Error("Failed to fetch image list");
+                    // }
+                    // const imageFilesUrl = await imageListResponse.json();
+                    // console.log(imageFilesUrl);
+                    
+                    const apiimgURL = process.env.REACT_APP_API_IMG_URL;
+                    const response = await fetch(imgPath);
+                    if (!response.ok) {
+                        throw new Error(`Failed to fetch images list from ${imgPath}. ${response.statusText}`);
+                    }
+
+                    try {
+                        const uploadResponse = await fetch(apiimgURL, {
+                            method: "POST",
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ path: imgPath }),
+                        });
+
+                        if (!uploadResponse.ok) {
+                            throw new Error(`Failed to upload image: ${uploadResponse.statusText}`);
+                        }
+
+                        const data = await uploadResponse.json();
+                        console.log(uploadResponse);
+                        // Mark image processing as complete
+                        setIsImageProcessingComplete(true);
+
+                    } catch (error) {
+                        console.error(`Error uploading images:`, error);
+                        // Ensure processing status is reset on error
+                        setIsImageProcessingComplete(false);
+                        return null;
+                    }
+
+                    // const uploadPromises = imageFiles.map(async (imageFile) => {
+                    //     const imgPath = `/yachts/${seriesId}/${modelID}/img/${imageFile}`;
+
+                    //     try {
+                    //         const uploadResponse = await fetch(apiimgURL, {
+                    //             method: "POST",
+                    //             headers: {
+                    //                 'Content-Type': 'application/json',
+                    //             },
+                    //             body: JSON.stringify({ path: imgPath }),
+                    //         });
+
+                    //         if (!uploadResponse.ok) {
+                    //             throw new Error(`Failed to upload image: ${uploadResponse.statusText}`);
+                    //         }
+                    //         return await uploadResponse.json();
+                    //     } catch (error) {
+                    //         console.error(`Error uploading image ${imgPath}:`, error);
+                    //         return null;
+                    //     }
+                    // });
+
+                    // await Promise.all(uploadPromises);
+                } catch (error) {
+                    console.error("Error uploading all images:", error);
+                }
+            }
+            uploadIMG(`/yachts/${seriesId}/${modelID}/img/list.txt`);
         }
     }, [seriesId, modelID, ymodel]);
 
@@ -141,9 +219,11 @@ function MainContent() {
                     <img src="/img/logo_SoT_background.png" alt="Background" />
                 </div>
                 {ymodel ? (
-                    <>
-                    <Chat key={ymodel.id} seriesId = {seriesId} modelID = {modelID}/>
-                    </>
+                    isImageProcessingComplete ? (
+                        <Chat key={ymodel.id} seriesId={seriesId} modelID={modelID} />
+                    ) : (
+                        <p>Processing images. Please wait...</p>
+                    )
                 ) : (
                     <p>Loading chat...</p>
                 )}

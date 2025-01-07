@@ -7,3 +7,4 @@ concurrent
 python-dotenv
 reportlab
 PyMuPDF
+pillow

@@ -30,6 +30,8 @@ function Chat({ seriesId, modelID }) {
     
     const [messages, setMessages] = useLocalStorage(`messages-${modelID}`, []);
     const [input, setInput] = useLocalStorage(`input-${modelID}`, "");
+    const [contextReady, setContextReady] = useState(false);
+    const [loading, setLoading] = useState(true); // For showing a loading spinner or message
     
     const messagesEndRef = useRef(null); // Create a ref for the messages container
 
