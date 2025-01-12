@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import './styles/MainContent.css';
 import Chat from './pages/Chat';
@@ -7,6 +7,7 @@ import Boat from './pages/boat';
 function MainContent() {
     const { seriesId, modelID } = useParams();
     const [ymodel, setYmodel] = useState(null);
+    const visualizerRef = useRef(null);
     
     useEffect(() => {
         // Fetch yacht data when the component mounts or parameters change
@@ -26,13 +27,21 @@ function MainContent() {
         fetchYmodelData();
     }, [seriesId, modelID]);  // Rerun when seriesId or modelID changes
     
-    
     // Function to extract the report name from the URL
     const getReportName = (url) => {
         const lastSlashIndex = url.lastIndexOf('/');
         return url.substring(lastSlashIndex + 1);
     };
 
+    const toggleFullscreen = () => {
+        if (!document.fullscreenElement) {
+            visualizerRef.current.requestFullscreen().catch(err => {
+                console.error('Error attempting to enable fullscreen:', err);
+            });
+        } else {
+            document.exitFullscreen();
+        }
+    };
 
     useEffect(() => {
         if (ymodel && ymodel.report) {
@@ -71,16 +80,13 @@ function MainContent() {
         }
     }, [seriesId, modelID, ymodel]);
 
-
     return (
+
         <div className="main-content">
-        
             {/* Left Panel */}
             <div className="left-panel">
-                
                 {/* Info + 3D Section */}
                 <div className="info-3d-container">
-
                     {/* Boat Information (Upper Side) */}
                     <div className="boat-info">
                         <div className="boat-characteristics">
@@ -95,6 +101,7 @@ function MainContent() {
                                 <p>Loading yacht data...</p>
                             )}
                         </div>
+                        
                         <div className="boat-image">
                             {ymodel && ymodel.image ? (
                                 <img src={`/yachts/${seriesId}/${modelID}/${ymodel.image}`} alt={`${seriesId}/${modelID}`} />
@@ -104,14 +111,18 @@ function MainContent() {
                         </div>
                     </div>
 
-
-                    {/* 3D Viewer Section (Below Info and Image) */}
-                    <div className="three-d-visualization">
+                    <div className="three-d-visualization" ref={visualizerRef}>
+                        <button 
+                            className="fullscreen-button"
+                            onClick={toggleFullscreen}
+                            title="Toggle Fullscreen">
+                            <span>⤢</span>
+                        </button>
                         <Boat />
                     </div>
                 </div>
 
-                {/* Report Download Section */}
+                 {/* Report Download Section */}
                 {ymodel && ymodel.report ? (
                     <div className="pdf-report">
                         <div className="pdf-report-header">
@@ -135,20 +146,18 @@ function MainContent() {
                 )}
             </div>
 
-            {/* Right Panel: chat */}
             <div className="right-panel">
                 <div className="background_img">
                     <img src="/img/logo_SoT_background.png" alt="Background" />
                 </div>
                 {ymodel ? (
                     <>
-                    <Chat key={ymodel.id} seriesId = {seriesId} modelID = {modelID}/>
+                    <Chat key={ymodel.id} seriesId={seriesId} modelID={modelID}/>
                     </>
                 ) : (
                     <p>Loading chat...</p>
                 )}
             </div>
-
         </div>
     );
 }
