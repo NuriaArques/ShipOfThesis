@@ -7,6 +7,7 @@ import Boat from './pages/boat';
 function MainContent() {
     const { seriesId, modelID } = useParams();
     const [ymodel, setYmodel] = useState(null);
+    const [ymodelResults, setYmodelResults] = useState(null);
     const visualizerRef = useRef(null);
     
     useEffect(() => {
@@ -32,6 +33,24 @@ function MainContent() {
         const lastSlashIndex = url.lastIndexOf('/');
         return url.substring(lastSlashIndex + 1);
     };
+
+    useEffect(() => {
+        // Fetch yacht data when the component mounts or parameters change
+        async function fetchYmodelDataResults() {
+            try {
+                const response = await fetch(`/yachts/${seriesId}/${modelID}/lassering-info.json`);
+                if (!response.ok) {
+                    throw new Error("Failed to fetch yacht lassering data");
+                }
+                const data = await response.json();
+                setYmodelResults(data);
+            } catch (error) {
+                console.error("Error fetching yacht lassering data:", error);
+            }
+        };
+
+        fetchYmodelDataResults();
+    }, [seriesId, modelID]);  // Rerun when seriesId or modelID changes
 
     const toggleFullscreen = () => {
         if (!document.fullscreenElement) {
@@ -143,6 +162,33 @@ function MainContent() {
                     </div>
                 ) : (
                     <p>Loading report...</p>
+                )}
+            </div>
+
+            <div className="middle-panel">
+                <h2>STANDARD ACHIEVED</h2>
+                {ymodelResults ? (
+                    <>
+                    <div className='color-panel' style={{ backgroundColor: ymodelResults.color }}> 
+                        <h1> {ymodelResults.readyToPaint} </h1>
+                    </div>
+                    <p> {ymodelResults.text} </p> 
+                    {ymodelResults.corrections && Array.isArray(ymodelResults.corrections) ? (
+                        <>
+                            <p style={{textAlign: "left"}}> The yacht requires improvement in:
+                            </p>
+                            <ul>
+                                {ymodelResults.corrections.map((item, index) => (
+                                    <li key={index}>{item}</li>
+                                ))}
+                            </ul>
+                        </>
+                    ) : (
+                        <> </>
+                    )}  
+                    </>
+                ) : (
+                    <p>Loading results...</p>
                 )}
             </div>
 
