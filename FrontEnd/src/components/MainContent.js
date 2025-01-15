@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import './styles/MainContent.css';
 import Chat from './pages/Chat';
@@ -7,8 +7,7 @@ import Boat from './pages/boat';
 function MainContent() {
     const { seriesId, modelID } = useParams();
     const [ymodel, setYmodel] = useState(null);
-    const [isImageProcessingComplete, setIsImageProcessingComplete] = useState(false);
-
+    const visualizerRef = useRef(null);
     
     useEffect(() => {
         // Fetch yacht data when the component mounts or parameters change
@@ -28,13 +27,21 @@ function MainContent() {
         fetchYmodelData();
     }, [seriesId, modelID]);  // Rerun when seriesId or modelID changes
     
-    
     // Function to extract the report name from the URL
     const getReportName = (url) => {
         const lastSlashIndex = url.lastIndexOf('/');
         return url.substring(lastSlashIndex + 1);
     };
 
+    const toggleFullscreen = () => {
+        if (!document.fullscreenElement) {
+            visualizerRef.current.requestFullscreen().catch(err => {
+                console.error('Error attempting to enable fullscreen:', err);
+            });
+        } else {
+            document.exitFullscreen();
+        }
+    };
 
     useEffect(() => {
         if (ymodel && ymodel.report) {
@@ -73,92 +80,13 @@ function MainContent() {
         }
     }, [seriesId, modelID, ymodel]);
 
-
-    useEffect(() => {
-        if (ymodel) {
-            // Function to upload images
-            async function uploadIMG(imgPath) {
-                try {
-                    // Fetch the list of image files
-                    // const imageListResponse = await fetch(`/yachts/${seriesId}/${modelID}/img/list`);
-                    // if (!imageListResponse.ok) {
-                    //     throw new Error("Failed to fetch image list");
-                    // }
-                    // const imageFilesUrl = await imageListResponse.json();
-                    // console.log(imageFilesUrl);
-                    
-                    const apiimgURL = process.env.REACT_APP_API_IMG_URL;
-                    const response = await fetch(imgPath);
-                    if (!response.ok) {
-                        throw new Error(`Failed to fetch images list from ${imgPath}. ${response.statusText}`);
-                    }
-
-                    try {
-                        const uploadResponse = await fetch(apiimgURL, {
-                            method: "POST",
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify({ path: imgPath }),
-                        });
-
-                        if (!uploadResponse.ok) {
-                            throw new Error(`Failed to upload image: ${uploadResponse.statusText}`);
-                        }
-
-                        const data = await uploadResponse.json();
-                        console.log(uploadResponse);
-                        // Mark image processing as complete
-                        setIsImageProcessingComplete(true);
-
-                    } catch (error) {
-                        console.error(`Error uploading images:`, error);
-                        // Ensure processing status is reset on error
-                        setIsImageProcessingComplete(false);
-                        return null;
-                    }
-
-                    // const uploadPromises = imageFiles.map(async (imageFile) => {
-                    //     const imgPath = `/yachts/${seriesId}/${modelID}/img/${imageFile}`;
-
-                    //     try {
-                    //         const uploadResponse = await fetch(apiimgURL, {
-                    //             method: "POST",
-                    //             headers: {
-                    //                 'Content-Type': 'application/json',
-                    //             },
-                    //             body: JSON.stringify({ path: imgPath }),
-                    //         });
-
-                    //         if (!uploadResponse.ok) {
-                    //             throw new Error(`Failed to upload image: ${uploadResponse.statusText}`);
-                    //         }
-                    //         return await uploadResponse.json();
-                    //     } catch (error) {
-                    //         console.error(`Error uploading image ${imgPath}:`, error);
-                    //         return null;
-                    //     }
-                    // });
-
-                    // await Promise.all(uploadPromises);
-                } catch (error) {
-                    console.error("Error uploading all images:", error);
-                }
-            }
-            uploadIMG(`/yachts/${seriesId}/${modelID}/img/list.txt`);
-        }
-    }, [seriesId, modelID, ymodel]);
-
-
     return (
+
         <div className="main-content">
-        
             {/* Left Panel */}
             <div className="left-panel">
-                
                 {/* Info + 3D Section */}
                 <div className="info-3d-container">
-
                     {/* Boat Information (Upper Side) */}
                     <div className="boat-info">
                         <div className="boat-characteristics">
@@ -173,6 +101,7 @@ function MainContent() {
                                 <p>Loading yacht data...</p>
                             )}
                         </div>
+                        
                         <div className="boat-image">
                             {ymodel && ymodel.image ? (
                                 <img src={`/yachts/${seriesId}/${modelID}/${ymodel.image}`} alt={`${seriesId}/${modelID}`} />
@@ -182,14 +111,18 @@ function MainContent() {
                         </div>
                     </div>
 
-
-                    {/* 3D Viewer Section (Below Info and Image) */}
-                    <div className="three-d-visualization">
+                    <div className="three-d-visualization" ref={visualizerRef}>
+                        <button 
+                            className="fullscreen-button"
+                            onClick={toggleFullscreen}
+                            title="Toggle Fullscreen">
+                            <span>⤢</span>
+                        </button>
                         <Boat />
                     </div>
                 </div>
 
-                {/* Report Download Section */}
+                 {/* Report Download Section */}
                 {ymodel && ymodel.report ? (
                     <div className="pdf-report">
                         <div className="pdf-report-header">
@@ -213,22 +146,18 @@ function MainContent() {
                 )}
             </div>
 
-            {/* Right Panel: chat */}
             <div className="right-panel">
                 <div className="background_img">
                     <img src="/img/logo_SoT_background.png" alt="Background" />
                 </div>
                 {ymodel ? (
-                    isImageProcessingComplete ? (
-                        <Chat key={ymodel.id} seriesId={seriesId} modelID={modelID} />
-                    ) : (
-                        <p>Processing images. Please wait...</p>
-                    )
+                    <>
+                    <Chat key={ymodel.id} seriesId={seriesId} modelID={modelID}/>
+                    </>
                 ) : (
                     <p>Loading chat...</p>
                 )}
             </div>
-
         </div>
     );
 }
