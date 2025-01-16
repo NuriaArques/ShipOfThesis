@@ -114,7 +114,6 @@ def chat_with_model():
     # Handle extracted images and context 
     history = [
         {"role": "user", "parts": ["For all subsequent queries, use this file for context: ", extracted_context]},
-        #{"role": "user", "parts": [{'mime_type':'image/jpeg', 'data': base64.b64encode(image.content).decode('utf-8')}, "These are images of the same file"]},
         {"role": "user", "parts": extracted_images},
         {"role": "user", "parts": ["Keep responses to 100 words or less. Also, if the user question is not a greeting or it is not related to ", extracted_context, "respond with 'Please, ask just questions regarding the yacht report.'"]},
         ######## LIMIT THE CONTEXT RESPONSES!!! INCLUDE A DEFAULT ANSWER
