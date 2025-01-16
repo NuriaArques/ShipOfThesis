@@ -218,12 +218,15 @@ function MainContent() {
                 <div className="background_img">
                     <img src="/img/logo_SoT_background.png" alt="Background" />
                 </div>
-                {ymodel ? (
+                {ymodel && ymodel.report ? (
                     isImageProcessingComplete ? (
                         <Chat key={ymodel.id} seriesId={seriesId} modelID={modelID} />
                     ) : (
                         <p>Processing images. Please wait...</p>
                     )
+                    // <>
+                    // <Chat key={ymodel.id} seriesId = {seriesId} modelID = {modelID}/>
+                    // </>
                 ) : (
                     <p>Loading chat...</p>
                 )}

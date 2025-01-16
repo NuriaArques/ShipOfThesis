@@ -24,11 +24,10 @@ model = genai.GenerativeModel("gemini-1.5-flash")
 
 extracted_context = ""
 extracted_images = ["Although the following images are included separately, they also appear inside the report: "]
-is_context_ready = False
 
 def extract_text_from_pdf(pdf_stream):
     """Extract text from a PDF file."""
-    pdf_reader = PyPDF2.PdfReader(pdf_stream)
+    pdf_reader = PyPDF2.PdfReader(pdf_stream, strict=False)
     extracted_text = ""
     for page in pdf_reader.pages:
         text = page.extract_text()
@@ -78,7 +77,7 @@ def read_img():
 
 @app.route('/report', methods=['POST'])
 def read_pdf():
-    global extracted_context_text
+    global extracted_context
     data = request.get_json()
     pdf_path = data.get('path') 
     frontend_base_url = str(os.getenv("FRONTEND_URL"))
@@ -117,9 +116,11 @@ def chat_with_model():
         {"role": "user", "parts": ["For all subsequent queries, use this file for context: ", extracted_context]},
         #{"role": "user", "parts": [{'mime_type':'image/jpeg', 'data': base64.b64encode(image.content).decode('utf-8')}, "These are images of the same file"]},
         {"role": "user", "parts": extracted_images},
-        {"role": "user", "parts": ["Keep responses to 100 words or less."]},
+        {"role": "user", "parts": ["Keep responses to 100 words or less. Also, if the user question is not a greeting or it is not related to ", extracted_context, "respond with 'Please, ask just questions regarding the yacht report.'"]},
+        ######## LIMIT THE CONTEXT RESPONSES!!! INCLUDE A DEFAULT ANSWER
     ]
     chat = model.start_chat(history=history)
+    
 
     try:
         response = chat.send_message(user_message)
