@@ -10,6 +10,7 @@ import io
 from dotenv import load_dotenv
 import fitz # PyMuPDF
 from PIL import Image  # For image handling
+from pdf2image import convert_from_path
 
 app = Flask(__name__)
 CORS(app, origins=['http://127.0.0.1:3000', 'http://localhost:3000']) # Allow app origins
@@ -35,7 +36,13 @@ def extract_text_from_pdf(pdf_stream):
             extracted_text += text
     return extracted_text
 
-        
+#Should save each of the pages of the pdf as a jpg into extracted_images, without saving them as files
+def extract_pdf_as_image():
+    global extracted_images
+    images = convert_from_path()
+    for i in range(len(images)):
+        extracted_images[i].save('page'+ str(i) +'.jpg', 'JPEG')
+
 @app.route('/img', methods=['POST'])
 def read_img():
     global extracted_images
@@ -108,7 +115,7 @@ def chat_with_model():
     # Handle extracted images and context 
     history = [
         {"role": "user", "parts": ["For all subsequent queries, use this file for context: ", extracted_context]},
-        # {"role": "user", "parts": ["The file also includes these images: ", extracted_images]},
+        #{"role": "user", "parts": [{'mime_type':'image/jpeg', 'data': base64.b64encode(image.content).decode('utf-8')}, "These are images of the same file"]},
         {"role": "user", "parts": extracted_images},
         {"role": "user", "parts": ["Keep responses to 100 words or less."]},
     ]
