@@ -8,6 +8,7 @@ function MainContent() {
     const { seriesId, modelID } = useParams();
     const [ymodel, setYmodel] = useState(null);
     const [ymodelResults, setYmodelResults] = useState(null);
+    const [ymodelReport, setYmodelReport] = useState(null);
     const visualizerRef = useRef(null);
     
     useEffect(() => {
@@ -86,6 +87,7 @@ function MainContent() {
                             throw new Error(`Failed to upload PDF: ${uploadResponse.statusText}`);
                         }
                         const data = await uploadResponse.json();
+                        setYmodelReport(data);
                          
                     } catch (error) {
                         console.error("Error sending PDF:", error);
@@ -196,7 +198,7 @@ function MainContent() {
                 <div className="background_img">
                     <img src="/img/logo_SoT_background.png" alt="Background" />
                 </div>
-                {ymodel ? (
+                {ymodel && ymodelReport ? (
                     <>
                     <Chat key={ymodel.id} seriesId={seriesId} modelID={modelID}/>
                     </>
