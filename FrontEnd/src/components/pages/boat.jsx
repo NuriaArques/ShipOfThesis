@@ -16,8 +16,8 @@ const Boat = () => {
   return (    
     <Canvas
     camera={{
-      position: [0, -40, 10], // Adjust the camera's initial position [x, y, z]
-      fov: 50,             // Field of view
+      position: [0, -40, 10], // initial camera position
+      fov: 50,             
     }}>
       <ambientLight intensity={Math.PI / 2} />
         <spotLight
