@@ -48,6 +48,7 @@ function MainContent() {
                 }
                 const data = await response.json();
                 setYmodelResults(data);
+                console.log(data);
             } catch (error) {
                 console.error("Error fetching yacht lasering data:", error);
             }
@@ -182,17 +183,19 @@ function MainContent() {
                     </div>
                     <p> {ymodelResults.text} </p> 
 
-                    {/* Display required corrections if applicable */}
-                    {ymodelResults.corrections && Array.isArray(ymodelResults.corrections) ? (
-                        <>
-                            <p style={{textAlign: "left"}}> The yacht requires improvement in: </p>
-                            <ul>
-                                {ymodelResults.corrections.map((item, index) => (
-                                    <li key={index}>{item}</li>
-                                ))}
-                            </ul>
-                        </>
-                    ) : null}  
+                        {/* Display required corrections if applicable */}
+                        {ymodelResults.corrections && Array.isArray(ymodelResults.corrections) ? (
+                            <>
+                                <p style={{textAlign: "left"}}> The yacht requires improvement in: </p>
+                                <div className='corrections'>
+                                    <ul>
+                                        {ymodelResults.corrections.map((item, index) => (
+                                            <li key={index}>{item}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </>
+                        ) : null}    
                     </>
                 ) : (
                     <p>Loading results...</p>
