@@ -21,5 +21,3 @@ def generateExplanation(input, user_message):
     output = response.json()
     return(output[0]['generated_text'])
     
-    return output
-    
