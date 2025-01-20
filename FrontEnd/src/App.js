@@ -8,7 +8,6 @@ import YachtSeries from './components/pages/YachtSeries';
 import YachtModels from './components/pages/YachtModels';
 import MainContent from './components/MainContent';
 import Contact from './components/pages/Contact';
-import LaseringProcess from './components/pages/LaseringProcess';
 import ShipOfThesis from './components/pages/ShipOfThesis';
 import './App.css';
 
@@ -42,7 +41,6 @@ function App() {
                         <Route path="/yachts/:seriesId" element={<YachtModels />} />
                         <Route path="/yachts/:seriesId/:modelID" element={<MainContent />} />
                         <Route path="/" element={<ShipOfThesis />} />
-                        <Route path="/lasering-process" element={<LaseringProcess />} />
                         <Route path="/contact" element={<Contact />} />
 
 

@@ -58,9 +58,6 @@ function Sidebar({ isOpen, toggleSidebar }) {
                     )}
                 </li>
                 
-                {/* Navigation link to "Lasering Process" */}
-                <li><Link to="/lasering-process" onClick={toggleSidebar} className={location.pathname === '/lasering-process' ? 'active-link' : ''}>Lasering Process</Link></li>
-                
                 {/* Navigation link to "Contact" page */}
                 <li><Link to="/contact" onClick={toggleSidebar}className={location.pathname === '/contact' ? 'active-link' : ''} >Contact</Link></li>
             </ul>
