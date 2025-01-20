@@ -9,12 +9,13 @@ from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, 
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.platypus import Indenter
 
-
 data = r"BackEnd\reportGeneration\data"
 
+# Returns all csv files in directory
 def getAllCSV(url):
     return  [f for f in listdir(url) if isfile(join(url, f))]
 
+# Checks if files are all csv type
 def makeSureOnlyCSV(files):
     checked = []
     for a in files:
@@ -22,6 +23,7 @@ def makeSureOnlyCSV(files):
             checked.append(a)
     return checked
 
+# Extracts content of file as a list
 def extractCSV(url):
     with open(url, newline='') as csvfile:
         csvReader = csv.reader(csvfile, delimiter='\n', quotechar='|')
@@ -31,6 +33,7 @@ def extractCSV(url):
             information.append(instance)
         return information
 
+# Formats data in document in a structured manner
 def formulateData(doc):
     columns = doc[0].split("\t")
     text = ""
@@ -44,20 +47,8 @@ def formulateData(doc):
         text = text+"\n"
     return text
 
-document = []
-csvFiles = makeSureOnlyCSV(getAllCSV(data))
 
-for file in csvFiles:
-    document.append(extractCSV(data+"\\"+file))
 
-finalString = []
-
-for d in document:
-    finalString.append(formulateData(d))
-f = open(r"BackEnd\reportGeneration\document", "w")
-for line in finalString:
-  f.write(line+"\n")
-f.close()
 def generateReport(finalString, modelOutput, path):
 
     #Library doesnt interpret \n as next line
@@ -126,8 +117,7 @@ def generateReport(finalString, modelOutput, path):
 
         except Exception as e:
             # Print Exception for missing data
-            print(Exception)
-            print("Missing Data")
+            print(f"Missing Data: {e}")
             
     
     # Create Table for the yacht data
@@ -144,7 +134,6 @@ def generateReport(finalString, modelOutput, path):
         ('GRID', (0, 0), (-1, -1), 1, colors.black),  # Black borders
         ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),  # Vertically align content
     ]))
-    print("Table Created")
     # Add table to story
     story.append(table)
     
@@ -155,6 +144,24 @@ def generateReport(finalString, modelOutput, path):
     except Exception as e:
         print(f"Error creating PDF: {e}")
 
+# Check for csv files
+document = []
+csvFiles = makeSureOnlyCSV(getAllCSV(data))
+for file in csvFiles:
+    document.append(extractCSV(data+"\\"+file))
+
+finalString = []
+# Iterates through the csv data and formats it properly
+for d in document:
+    finalString.append(formulateData(d))
+
+# Writes the formatted data in the document
+f = open(r"BackEnd\reportGeneration\document", "w")
+for line in finalString:
+  f.write(line+"\n")
+f.close()
+
+# Creating Prompt for Qwen Model and how it should it create the report
 user_message = "Compute the ratio all parts which are not ready to paint. Be precise but dont show calculations. Talk about relevance of the roughness in yacht painting process while remembering that roughness of at least 2.5 is crucial for good pain adhesion."
 system_message = """You are Qwen, created by Alibaba Cloud. Answer each question in document format based on these data: 
 """.join(finalString)
@@ -166,6 +173,7 @@ x=''.join(x[2:])
 # Prepare finalString as a list of entries
 finalString = ''.join(finalString).split("\n\n")
 
+# Path of where the report is created
 path = "FrontEnd\public\yachts\grand-sturdy\grand-sturdy-30-ac\Report_GS30AC_12-2024.pdf"
 generateReport(finalString, x, path)
 
