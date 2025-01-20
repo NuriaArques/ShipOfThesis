@@ -186,6 +186,11 @@
   color: white;
 }
 
+.corrections{
+  height: 30vh;
+  overflow-y: scroll;
+}
+
 /* Right panel (~40% of the screen's width) */
 .right-panel {
   flex: 1;

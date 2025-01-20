@@ -1,9 +1,9 @@
 {
-    "id": "grand-sturdy-30-sedan",
-    "name": "Grand Sturdy 30.0 Sedan",
+    "id": "grand-sturdy-30-ac",
+    "name": "Grand Sturdy 30.0 AC",
     "readyToPaint": "NO",
     "color": "Red",
-    "text": "Grand Sturdy 35.0 AC has a roughness below the required standard in more than 20% of its areas. Review the yacht again.",
+    "text": "Grand Sturdy 30.0 AC has a roughness below the required standard in more than 20% of its areas. Review the yacht again.",
     "ratio": 0.424892703862661,
     "corrections": [
         "1",
