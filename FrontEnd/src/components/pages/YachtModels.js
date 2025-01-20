@@ -4,21 +4,22 @@ import { useParams } from 'react-router-dom';
 import '../styles/YachtCard.css';
 
 function YachtReviewPage() {
-    const { seriesId } = useParams(); // Get yacht series ID from the URL
-    const [series, setSeries] = useState(null);
+    const { seriesId } = useParams(); // Get yacht series ID from the URL parameters
+    const [series, setSeries] = useState(null); // State to store series data
 
     useEffect(() => {
         async function fetchSeriesWithModels() {
             try {
-                const seriesPath = `/yachts/${seriesId}`;
+                const seriesPath = `/yachts/${seriesId}`; // Path to series data
 
-                // Fetch the series info
+                // Fetch general series information
                 const seriesInfoResponse = await fetch(`${seriesPath}/general-info.json`);
                 const seriesInfo = await seriesInfoResponse.json();
 
-                // Fetch model folders inside the series directory
+                // Get model folders from the series directory
                 const modelFolders = seriesInfo.models || [];
 
+                // Fetch details for each model in the series
                 const models = await Promise.all(
                     modelFolders.map(async (folder) => {
                         const modelPath = `${seriesPath}/${folder}`;
@@ -27,16 +28,17 @@ function YachtReviewPage() {
 
                         return {
                             ...modelInfo,
-                            image: `${modelPath}${modelInfo.image}`,
-                            report: `${modelPath}${modelInfo.report}`,
-                            id: folder, // Folder name as ID
+                            image: `${modelPath}${modelInfo.image}`, // Full image path
+                            report: `${modelPath}${modelInfo.report}`, // Full report path
+                            id: folder, // Folder name as model ID
                         };
                     })
                 );
 
+                // Update state with series and models data
                 setSeries({
                     ...seriesInfo,
-                    image: `${seriesPath}/linssen-${seriesId}.webp`,
+                    image: `${seriesPath}/linssen-${seriesId}.webp`, // Series image path
                     models,
                 });
             } catch (error) {
@@ -45,12 +47,14 @@ function YachtReviewPage() {
         }
 
         fetchSeriesWithModels();
-    }, [seriesId]);
+    }, [seriesId]); // Re-run effect when seriesId changes
 
+    // Show loading message while data is being fetched
     if (!series) {
         return <div>Loading...</div>;
     }
 
+    // Remove any HTML line breaks from the series name
     const cleanedName = series.name.replace(/<br\s*\/?>/gi, '');
     
     return (
@@ -65,6 +69,7 @@ function YachtReviewPage() {
                 </div>
             </div>
             <div className="yacht-cards-models-container">
+            {/* Render a YachtCard for each model in the series */}
                 {series.models.map((model) => (
                     <YachtCard key={model.id} yacht={model} basePath={`/yachts/${series.id}`} />
                 ))}

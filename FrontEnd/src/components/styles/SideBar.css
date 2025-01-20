@@ -14,10 +14,12 @@
     align-items: center;
 }
 
+/* Sidebar open state */
 .sidebar.open {
     left: 0; /* Slide into view */
 }
 
+/* Close button */
 .sidebar .close-btn {
     background: transparent;
     color: white;
@@ -28,6 +30,7 @@
     margin: 10px 10px;
 }
 
+/* Sidebar navigation */
 .sidebar ul {
     list-style: none;
     padding: 0.2vw 1vh;

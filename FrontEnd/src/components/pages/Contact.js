@@ -23,6 +23,7 @@ const Contact = () => {
                     <div className="info-icon">📞</div>
                 </div>
             </div>
+            
             <div className="contact-card">
                 <div className="card-info">
                     <div className="contact-info">
@@ -32,6 +33,7 @@ const Contact = () => {
                     <div className="info-icon">✉️</div>
                 </div>
             </div>
+
             <div className="contact-card">
                 <div className="card-info">
                     <div className="contact-info">

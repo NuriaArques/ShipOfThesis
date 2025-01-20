@@ -5,14 +5,17 @@ import Chat from './pages/Chat';
 import Boat from './pages/boat';
 
 function MainContent() {
-    const { seriesId, modelID } = useParams();
+    const { seriesId, modelID } = useParams(); // Extract parameters from the URL
+
+    // State variables to store fetched yacht data
     const [ymodel, setYmodel] = useState(null);
     const [ymodelResults, setYmodelResults] = useState(null);
     const [ymodelReport, setYmodelReport] = useState(null);
-    const visualizerRef = useRef(null);
+
+    const visualizerRef = useRef(null); // Reference for the 3D visualizer container
     
     useEffect(() => {
-        // Fetch yacht data when the component mounts or parameters change
+        // Fetch general yacht data when the component mounts or parameters change
         async function fetchYmodelData() {
             try {
                 const response = await fetch(`/yachts/${seriesId}/${modelID}/general-info.json`);
@@ -36,23 +39,24 @@ function MainContent() {
     };
 
     useEffect(() => {
-        // Fetch yacht data when the component mounts or parameters change
+        // Fetch additional yacht data related to launch (lasering) information
         async function fetchYmodelDataResults() {
             try {
-                const response = await fetch(`/yachts/${seriesId}/${modelID}/lassering-info.json`);
+                const response = await fetch(`/yachts/${seriesId}/${modelID}/lasering-info.json`);
                 if (!response.ok) {
-                    throw new Error("Failed to fetch yacht lassering data");
+                    throw new Error("Failed to fetch yacht lasering data");
                 }
                 const data = await response.json();
                 setYmodelResults(data);
             } catch (error) {
-                console.error("Error fetching yacht lassering data:", error);
+                console.error("Error fetching yacht lasering data:", error);
             }
         };
 
         fetchYmodelDataResults();
     }, [seriesId, modelID]);  // Rerun when seriesId or modelID changes
 
+    // Function to toggle fullscreen mode for the 3D visualizer
     const toggleFullscreen = () => {
         if (!document.fullscreenElement) {
             visualizerRef.current.requestFullscreen().catch(err => {
@@ -65,7 +69,7 @@ function MainContent() {
 
     useEffect(() => {
         if (ymodel && ymodel.report) {
-            // Function to upload PDF
+            // Function to upload the PDF report
             async function uploadPDF(reportPath) {
                 try {
                     const apipdfURL = process.env.REACT_APP_API_PDF_URL; 
@@ -101,14 +105,13 @@ function MainContent() {
         }
     }, [seriesId, modelID, ymodel]);
 
-    return (
 
+    return (
         <div className="main-content">
-            {/* Left Panel */}
+            {/* Left Panel: Yacht information + 3D visualizer + report */}
             <div className="left-panel">
-                {/* Info + 3D Section */}
                 <div className="info-3d-container">
-                    {/* Boat Information (Upper Side) */}
+                    {/* Yacht Information Section */}
                     <div className="boat-info">
                         <div className="boat-characteristics">
                             {ymodel ? (
@@ -132,6 +135,7 @@ function MainContent() {
                         </div>
                     </div>
 
+                    {/* 3D Visualizer Section */}
                     <div className="three-d-visualization" ref={visualizerRef}>
                         <button 
                             className="fullscreen-button"
@@ -139,22 +143,22 @@ function MainContent() {
                             title="Toggle Fullscreen">
                             <span>⤢</span>
                         </button>
+                        {/* Boat Component for 3D visualization */}
                         <Boat />
                     </div>
                 </div>
 
-                 {/* Report Download Section */}
+                {/* Report Section */}
                 {ymodel && ymodel.report ? (
                     <div className="pdf-report">
                         <div className="pdf-report-header">
                             <span>{getReportName(ymodel.report)}</span>
 
+                            {/* Download and Open PDF buttons */}
                             <div className="pdf-report-buttons">
-                                {/* Button to download the PDF */}
                                 <a href={`/yachts/${seriesId}/${modelID}/${ymodel.report}`} download title="Download Report">
                                     <span style={{ cursor: 'pointer', marginRight: '10px' }}>⤓</span>
                                 </a>
-                                {/* Button to open the PDF in a new tab */}
                                 <a href={`/yachts/${seriesId}/${modelID}/${ymodel.report}`} target="_blank" rel="noopener noreferrer" title="Open Report">
                                     <span style={{ cursor: 'pointer' }}>⤢</span>
                                 </a>
@@ -167,39 +171,42 @@ function MainContent() {
                 )}
             </div>
 
+            {/* Middle Panel: Yachts quality standard evaluation results */}
             <div className="middle-panel">
                 <h2>STANDARD ACHIEVED</h2>
                 {ymodelResults ? (
                     <>
+                    {/* Display the evaluation result */}
                     <div className='color-panel' style={{ backgroundColor: ymodelResults.color }}> 
                         <h1> {ymodelResults.readyToPaint} </h1>
                     </div>
                     <p> {ymodelResults.text} </p> 
+
+                    {/* Display required corrections if applicable */}
                     {ymodelResults.corrections && Array.isArray(ymodelResults.corrections) ? (
                         <>
-                            <p style={{textAlign: "left"}}> The yacht requires improvement in:
-                            </p>
+                            <p style={{textAlign: "left"}}> The yacht requires improvement in: </p>
                             <ul>
                                 {ymodelResults.corrections.map((item, index) => (
                                     <li key={index}>{item}</li>
                                 ))}
                             </ul>
                         </>
-                    ) : (
-                        <> </>
-                    )}  
+                    ) : null}  
                     </>
                 ) : (
                     <p>Loading results...</p>
                 )}
             </div>
 
+            {/* Right Panel: Chat functionality */}
             <div className="right-panel">
                 <div className="background_img">
                     <img src="/img/logo_SoT_background.png" alt="Background" />
                 </div>
                 {ymodel && ymodelReport ? (
                     <>
+                    {/* Chat Component: Loads chat when yacht model and report are available */}
                     <Chat key={ymodel.id} seriesId={seriesId} modelID={modelID}/>
                     </>
                 ) : (

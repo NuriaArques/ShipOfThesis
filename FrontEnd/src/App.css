@@ -117,18 +117,6 @@ body, html {
   width: fit-content;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .header {
-    flex-direction: column;
-    padding: 5px;
-  }
-
-  .pdf-report a {
-    width: 100%;
-  }
-}
-
 .three-d-visualization {
   position: relative;
   width: 95%;
@@ -166,4 +154,16 @@ body, html {
   width: 100%;
   height: 100%;
   background: white;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .header {
+    padding-left: 2vh;
+  }
+
+  .pdf-report a {
+    width: 100%;
+  }
 }
