@@ -124,10 +124,11 @@ def generateReport(finalString, modelOutput, path):
             
             table_data.append([img,img_heat, Paragraph(details_text, styles['BodyText'])])
 
-#BackEnd\reportGeneration\data\pictures3\images\slice000_006_true_0_pred_0.png
         except Exception as e:
-            # Handle cases with missing data
-            table_data.append(["No Image", Paragraph("Content missing", styles['BodyText'])])
+            # Print Exception for missing data
+            print(Exception)
+            print("Missing Data")
+            
     
     # Create Table for the yacht data
     # Size of the coloumns for the table
@@ -143,7 +144,7 @@ def generateReport(finalString, modelOutput, path):
         ('GRID', (0, 0), (-1, -1), 1, colors.black),  # Black borders
         ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),  # Vertically align content
     ]))
-    print("AAA")
+    print("Table Created")
     # Add table to story
     story.append(table)
     
