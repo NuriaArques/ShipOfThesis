@@ -188,7 +188,7 @@
 
 .corrections{
   height: 30vh;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 /* Right panel (~40% of the screen's width) */

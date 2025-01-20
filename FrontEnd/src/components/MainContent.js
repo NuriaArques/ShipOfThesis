@@ -48,7 +48,6 @@ function MainContent() {
                 }
                 const data = await response.json();
                 setYmodelResults(data);
-                console.log(data);
             } catch (error) {
                 console.error("Error fetching yacht lasering data:", error);
             }
