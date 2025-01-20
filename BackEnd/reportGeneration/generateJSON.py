@@ -64,12 +64,13 @@ def generateJson(id,name,readyToPaint,color,text,correction):
     "readyToPaint": readyToPaint,
     "color": color,
     "text": text,
-    "ratio": ratio
+    "ratio": ratio,
+    "corrections": failed
     }
 
 
     report_path = "FrontEnd/public/yachts/grand-sturdy/grand-sturdy-30-ac"  
-    json_file_path = os.path.join(report_path, "yacht_inspection_report.json")
+    json_file_path = os.path.join(report_path, "lasering-info.json")
 
     # Write the JSON file
     with open(json_file_path, 'w') as json_file:
