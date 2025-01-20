@@ -154,7 +154,6 @@ function MainContent() {
                     <div className="pdf-report">
                         <div className="pdf-report-header">
                             <span>{getReportName(ymodel.report)}</span>
-
                             {/* Download and Open PDF buttons */}
                             <div className="pdf-report-buttons">
                                 <a href={`/yachts/${seriesId}/${modelID}/${ymodel.report}`} download title="Download Report">
