@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import './styles/MainContent.css';
 import Chat from './pages/Chat';
 import Boat from './pages/boat';
+import { Center } from '@react-three/drei';
 
 function MainContent() {
     const { seriesId, modelID } = useParams(); // Extract parameters from the URL
@@ -172,7 +173,7 @@ function MainContent() {
 
             {/* Middle Panel: Yachts quality standard evaluation results */}
             <div className="middle-panel">
-                <h2>STANDARD ACHIEVED</h2>
+                <h2 style={{alignItems: Center}}>STANDARD ACHIEVED</h2>
                 {ymodelResults ? (
                     <>
                     {/* Display the evaluation result */}
@@ -184,7 +185,7 @@ function MainContent() {
                         {/* Display required corrections if applicable */}
                         {ymodelResults.corrections && Array.isArray(ymodelResults.corrections) ? (
                             <>
-                                <p style={{textAlign: "left"}}> The yacht requires improvement in: </p>
+                                <p> With only a {Math.round(ymodelResults.ratio * 100)}% of the yacht surface achieving the quality standards, it requires improvement in the following areas: </p>
                                 <div className='corrections'>
                                     <ul>
                                         {ymodelResults.corrections.map((item, index) => (

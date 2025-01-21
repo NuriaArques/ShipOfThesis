@@ -3,6 +3,10 @@
     "name": "Grand Sturdy 30.0 Sedan",
     "readyToPaint": "ALMOST",
     "color": "Orange",
-    "text": "Grand Sturdy 30.0 Sedan has achieved the roughness standards in more than 80% of its areas. Review the remaining ones and the yacht should be ready to paint.",
-    "corrections": ["front", "top-left"]
+    "text": "Grand Sturdy 30.0 Sedan has achieved the roughness standards in more than 80% of its areas. Review the remaining ones and the yacht should be ready to paint",
+    "ratio": 0.9,
+    "corrections": [
+        "1",
+        "12"
+    ]
 }

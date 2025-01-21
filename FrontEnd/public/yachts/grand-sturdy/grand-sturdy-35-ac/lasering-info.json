@@ -3,6 +3,16 @@
     "name": "Grand Sturdy 35.0 AC",
     "readyToPaint": "NO",
     "color": "Red",
-    "text": "Grand Sturdy 35.0 AC has a roughness below the required standard in more than the 20% of its areas. Review the yacht again.",
-    "corrections": ["front", "top-left", "top-right", "bottom"]
+    "text": "Grand Sturdy 35.0 AC has a roughness below the required standard in more than 20% of its areas. Review the yacht again.",
+    "ratio": 0.6,
+    "corrections": [
+        "1",
+        "4",
+        "6",
+        "8",
+        "11",
+        "16",
+        "17",
+        "19"
+    ]
 }
