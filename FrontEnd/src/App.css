@@ -129,6 +129,7 @@ body, html {
   }
 }
 
+/* 3D visualization + full screen */
 .three-d-visualization {
   position: relative;
   width: 95%;
