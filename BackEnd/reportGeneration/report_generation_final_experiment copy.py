@@ -1,43 +1,66 @@
 import csv
-from datetime import datetime
-import json
 from os import listdir
 import os
 from os.path import isfile, join
+import time
+import pandas as pd
 from ReportAPI import generateExplanation
 from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Image, Spacer
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.platypus import Indenter
-
 import generateJSON
-###To generate a report you have to place all csv files in the repository BackEnd\reportGeneration\data and all the pictures (standard and heatmaps) 
-# in the corresponding BackEnd\reportGeneration\data\picturesRaw\heatmaps
-# or BackEnd\reportGeneration\data\picturesRaw\heatmaps and run compressor.py 
-# After that you can run this class which will take care of everything else
-data = r"BackEnd\reportGeneration\data"
+import json
+from datetime import datetime
 
-# Returns all csv files in directory
+
+###Just an experiment file but in case someone wants to rerun them most were run on both these files
+
+    # Returns all csv files in directory
 def getAllCSV(url):
-    return  [f for f in listdir(url) if isfile(join(url, f))]
+        return  [f for f in listdir(url) if isfile(join(url, f))]
 
-# Checks if files are all csv type
+    # Checks if files are all csv type
 def makeSureOnlyCSV(files):
     checked = []
     for a in files:
         if(a[len(a)-4:len(a)]==".csv"):
             checked.append(a)
-    return checked
+        return checked
 
 # Extracts content of file as a list
-def extractCSV(url):
+def extractCSV(url,howMany):
     with open(url, newline='') as csvfile:
+        anotherCounter = howMany
+        counter = 0
+        ratio = 0
+        target = 0
         csvReader = csv.reader(csvfile, delimiter='\n', quotechar='|')
         information = []
+        counterHelpMe = True
         for row in csvReader:
-            instance = "".join(row)
-            information.append(instance)
+            if(counterHelpMe):
+                counterHelpMe = False
+             
+                holder = row[0].split("\t")
+                
+                instance = "".join(row)
+                information.append(instance)
+            else:
+                if(howMany==0):
+                    break
+                holder = row[0].split("\t")
+                state = float(holder[2])
+                if(ratio<target and float(state)==0):
+                    continue
+                instance = "".join(row)
+                information.append(instance)
+                howMany=howMany-1
+                if(state==1):
+                    counter = counter+1
+                ratio = counter/(anotherCounter-howMany)
+            
         return information
 
 # Formats data in document in a structured manner
@@ -46,6 +69,7 @@ def formulateData(doc):
     text = ""
     id = 0
     for line in doc[1:]:
+        
         text = text + "ID: "+str(id)+"\n"
         id = id+1
         string = line.split("\t")
@@ -152,48 +176,65 @@ def generateReport(finalString, modelOutput, path):
         print(f"Error creating PDF: {e}")
 
 # Check for csv files
-document = []
-csvFiles = makeSureOnlyCSV(getAllCSV(data))
-for file in csvFiles:
-    document.append(extractCSV(data+"\\"+file))
-
-finalString = []
-# Iterates through the csv data and formats it properly
 
 
-for d in document:
-    finalString.append(formulateData(d))
+
+
+
+def howMany(howMany):
+    data = r"BackEnd\reportGeneration\data"
+    document = []
+    csvFiles = makeSureOnlyCSV(getAllCSV(data))
+    for file in csvFiles:
+        document.append(extractCSV(data+"\\"+file,howMany))
+
+    finalString = []
+    # Iterates through the csv data and formats it properly
+    for d in document:
+        finalString.append(formulateData(d))
 
     # Writes the formatted data in the document
-f = open(r"BackEnd\reportGeneration\document", "w")
-for line in finalString:
-    f.write(line+"\n")
+    f = open(r"BackEnd\reportGeneration\document", "w")
+    for line in finalString:
+        f.write(line+"\n")
     f.close()
-generateJSON.main()
+    generateJSON.main()
 
         # Open and read the JSON file
-with open('FrontEnd\public\yachts\grand-sturdy\grand-sturdy-30-ac\lasering-info.json', 'r') as file:
-        data = json.load(file)
+    with open('FrontEnd\public\yachts\grand-sturdy\grand-sturdy-30-ac\lasering-info.json', 'r') as file:
+            data = json.load(file)
 
-ratio = data['ratio']
+    ratio = data['ratio']
     # Creating Prompt for Qwen Model and how it should it create the report
-date = datetime.today().strftime('%Y-%m-%d')
-user_message = "Create a brief report for workers in yacht manufacturing of a routine quality inspection. Todays date is "+date+ "Is is very important that you write something. Create a summary of the report knowing that the ratio of succesfull parts is "+str(ratio)+". Talk about relevance of the roughness in yacht painting process while remembering that roughness of at least 2.5 is crucial for good pain adhesion. Start the response with AAA and end with ZZZ"
-system_message = """You are Qwen, created by Alibaba Cloud. Answer each question in document format based on these data: 
-""".join(finalString)
-x = generateExplanation(system_message,user_message)
-x = ''.join(x.split("AAA")[2])
-x = x.replace('*','')
-x = x.replace('#','')
-x = x.replace('ZZZ','')
+    date = datetime.today().strftime('%Y-%m-%d')
+    user_message = "Create a brief report for workers in yacht manufacturing of a routine quality inspection. Todays date is "+date+ "Is is very important that you write something. Create a summary of the report knowing that the ratio of succesfull parts is "+str(ratio)+". Talk about relevance of the roughness in yacht painting process while remembering that roughness of at least 2.5 is crucial for good pain adhesion."
+    system_message = """You are Qwen, created by Alibaba Cloud. Answer each question in document format based on these data: 
+    """.join(finalString)
+    x = generateExplanation(system_message,user_message)
+    x = ''.join(x.split("User:")[1])
+    x = x.split(":")
+    x=''.join(x[2:])
 
-# Prepare finalString as a list of entries
-finalString = ''.join(finalString).split("\n\n")
+    # Prepare finalString as a list of entries
+    finalString = ''.join(finalString).split("\n\n")
 
-# Path of where the report is created
-path = "FrontEnd\public\yachts\grand-sturdy\grand-sturdy-35-sedan\Report_GS30AC_12-2024.pdf"
-generateReport(finalString, x, path)
+    # Path of where the report is created
+    path = "FrontEnd\public\yachts\grand-sturdy\grand-sturdy-30-ac\Report_GS30AC_12-2024.pdf"
+    generateReport(finalString, x, path)
 
+times = []
+amount = []
+for i in range(23):
+    currentTime = time.time()
+    howMany((i+1)*10)
+    howLong = time.time()-currentTime
+    amount.append((i+1)*10)
 
+    times.append(howLong)
+    print(times)
 
+data = {"Amount": amount,"Times": times}
+df = pd.DataFrame(data)
 
+# Save to a CSV file
+df.to_csv("times_and_amount.csv", index=False)
