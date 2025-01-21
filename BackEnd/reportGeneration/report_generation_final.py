@@ -1,21 +1,14 @@
 import csv
-from datetime import datetime
-import json
 from os import listdir
 import os
 from os.path import isfile, join
-from ReportAPI import generateExplanation
+from test import generateExplanation
 from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Image, Spacer
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.platypus import Indenter
 
-import generateJSON
-###To generate a report you have to place all csv files in the repository BackEnd\reportGeneration\data and all the pictures (standard and heatmaps) 
-# in the corresponding BackEnd\reportGeneration\data\picturesRaw\heatmaps
-# or BackEnd\reportGeneration\data\picturesRaw\heatmaps and run compressor.py 
-# After that you can run this class which will take care of everything else
 data = r"BackEnd\reportGeneration\data"
 
 # Returns all csv files in directory
@@ -159,39 +152,29 @@ for file in csvFiles:
 
 finalString = []
 # Iterates through the csv data and formats it properly
-
-
 for d in document:
     finalString.append(formulateData(d))
 
-    # Writes the formatted data in the document
+# Writes the formatted data in the document
 f = open(r"BackEnd\reportGeneration\document", "w")
 for line in finalString:
-    f.write(line+"\n")
-    f.close()
-generateJSON.main()
+  f.write(line+"\n")
+f.close()
 
-        # Open and read the JSON file
-with open('FrontEnd\public\yachts\grand-sturdy\grand-sturdy-30-ac\lasering-info.json', 'r') as file:
-        data = json.load(file)
-
-ratio = data['ratio']
-    # Creating Prompt for Qwen Model and how it should it create the report
-date = datetime.today().strftime('%Y-%m-%d')
-user_message = "Create a brief report for workers in yacht manufacturing of a routine quality inspection. Todays date is "+date+ "Is is very important that you write something. Create a summary of the report knowing that the ratio of succesfull parts is "+str(ratio)+". Talk about relevance of the roughness in yacht painting process while remembering that roughness of at least 2.5 is crucial for good pain adhesion. Start the response with AAA and end with ZZZ"
+# Creating Prompt for Qwen Model and how it should it create the report
+user_message = "Compute the ratio all parts which are not ready to paint. Be precise but dont show calculations. Talk about relevance of the roughness in yacht painting process while remembering that roughness of at least 2.5 is crucial for good pain adhesion."
 system_message = """You are Qwen, created by Alibaba Cloud. Answer each question in document format based on these data: 
 """.join(finalString)
 x = generateExplanation(system_message,user_message)
-x = ''.join(x.split("AAA")[2])
-x = x.replace('*','')
-x = x.replace('#','')
-x = x.replace('ZZZ','')
+x = ''.join(x.split("User:")[1])
+x = x.split(":")
+x=''.join(x[2:])
 
 # Prepare finalString as a list of entries
 finalString = ''.join(finalString).split("\n\n")
 
 # Path of where the report is created
-path = "FrontEnd\public\yachts\grand-sturdy\grand-sturdy-35-sedan\Report_GS30AC_12-2024.pdf"
+path = "FrontEnd\public\yachts\grand-sturdy\grand-sturdy-30-ac\Report_GS30AC_12-2024.pdf"
 generateReport(finalString, x, path)
 
 
