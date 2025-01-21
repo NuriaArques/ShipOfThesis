@@ -34,7 +34,10 @@ npm start
 deactivate
 ```
 
-# Report generation
+## Report generation
+
+To generate a report, follow these steps:
+
 1. First install the all the requirements from the file
 
 2. Make sure all the relevant pictures are in   `BackEnd\reportGeneration\data\picturesRaw` directory in their corresponding folder
