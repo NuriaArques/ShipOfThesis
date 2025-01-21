@@ -4,7 +4,7 @@ import requests
 
 
 
-
+###this is used to connect to huggingface api and get respons from Qwen model
 def generateExplanation(input, user_message):
     system_message = input
     # Define the model and API endpoint

@@ -2,7 +2,9 @@ import csv
 
 
 
+##used to create json file for the report generation and middle part of main interface
 
+#Get all data from csv file
 def extractFile(url):
     with open(url, newline='\n') as csvfile:
         csvReader = csv.reader(csvfile, delimiter='\n', quotechar='|')
@@ -12,8 +14,8 @@ def extractFile(url):
             information.append(instance)
         return information
     
-file = extractFile("BackEnd/reportGeneration/document")
 
+#Get all id that failes and total of ids
 def getAllFailID(file):
     currentID = None
     failedID = []
@@ -31,33 +33,11 @@ def getAllFailID(file):
     d['failed'] = failedID
     d['total'] = totalID
     return d
-obj = getAllFailID(file)
-failed = (obj['failed'])
-total = (obj['total'])
-print(len(failed))
-ratio = 1-len(failed)/total
-print(ratio)
-color = None
-readyToPaint = "NO"
-text = ""
-correction = failed
-if(ratio<0.8):
-    color = "Red"
-    text = r"Grand Sturdy 35.0 AC has a roughness below the required standard in more than 20% of its areas. Review the yacht again."
-if(ratio>=0.8):
-    color = "Orange"
-    readyToPaint = "ALMOST"
-    text = r"Grand Sturdy 30.0 Sedan has achieved the roughness standards in more than 80% of its areas. Review the remaining ones and the yacht should be ready to paint"
-if(ratio==1):
-    color = "Green"
-    readyToPaint = "YES"
-    text = r"Grand Sturdy 30.0 AC fulfills ALL the necessary standard requirements and is ready to be painted."
-id = "grand-sturdy-30-sedan"
-name = "Grand Sturdy 30.0 Sedan"
 
 import json
 import os
-def generateJson(id,name,readyToPaint,color,text,correction):
+#Generate json
+def generateJson(id,name,readyToPaint,color,text,correction,ratio):
     data = {
     "id": id,
     "name": name,
@@ -65,7 +45,7 @@ def generateJson(id,name,readyToPaint,color,text,correction):
     "color": color,
     "text": text,
     "ratio": ratio,
-    "corrections": failed
+    "corrections": correction
     }
 
 
@@ -76,9 +56,35 @@ def generateJson(id,name,readyToPaint,color,text,correction):
     with open(json_file_path, 'w') as json_file:
         json.dump(data, json_file, indent=4)
 
-generateJson(id,name,readyToPaint,color,text,correction)
+#used to run it outside the class
+def main():
+    file = extractFile("BackEnd/reportGeneration/document")
 
+    obj = getAllFailID(file)
+    failed = (obj['failed'])
+    total = (obj['total'])
+    print(len(failed))
+    ratio = 1-len(failed)/total
+    print(ratio)
+    color = None
+    readyToPaint = "NO"
+    txt = ""
+    correction = failed
+    if(ratio<0.8):
+        color = "Red"
+        text = r"Grand Sturdy 35.0 AC has a roughness below the required standard in more than 20% of its areas. Review the yacht again."
+    if(ratio>=0.8):
+        color = "Orange"
+        readyToPaint = "ALMOST"
+        text = r"Grand Sturdy 30.0 Sedan has achieved the roughness standards in more than 80% of its areas. Review the remaining ones and the yacht should be ready to paint"
+    if(ratio==1):
+        color = "Green"
+        readyToPaint = "YES"
+        text = r"Grand Sturdy 30.0 AC fulfills ALL the necessary standard requirements and is ready to be painted."
+    id = "grand-sturdy-30-sedan"
+    name = "Grand Sturdy 30.0 Sedan"
 
+    generateJson(id,name,readyToPaint,color,text,correction,ratio)
 
 
     
